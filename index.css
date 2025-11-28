@@ -1,0 +1,130 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-once {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes confetti-fall {
+  0% { 
+    transform: translateY(0) rotate(0deg); 
+    opacity: 1; 
+  }
+  100% { 
+    transform: translateY(300px) rotate(360deg); 
+    opacity: 0; 
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out;
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.4s ease-out;
+}
+
+.animate-pulse-once {
+  animation: pulse-once 0.5s ease-out;
+}
+
+.animate-confetti-fall {
+  animation: confetti-fall linear forwards;
+}
+
+/* Hide Scrollbar */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Safe Area Insets for iOS */
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.pb-safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Smooth Transitions */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Custom Scrollbar for Desktop */
+@media (min-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+  }
+}
+
+/* Responsive Text Sizes */
+@layer utilities {
+  .text-xs {
+    font-size: 0.75rem;
+    line-height: 1rem;
+  }
+
+  @media (max-width: 640px) {
+    .text-xs {
+      font-size: 0.7rem;
+      line-height: 0.95rem;
+    }
+  }
+}
+
+/* Grid Template Rows for Smooth Expand/Collapse */
+.grid-rows-\[0fr\] {
+  grid-template-rows: 0fr;
+}
+
+.grid-rows-\[1fr\] {
+  grid-template-rows: 1fr;
+}

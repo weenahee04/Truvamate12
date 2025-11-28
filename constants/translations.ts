@@ -1,0 +1,2010 @@
+
+export const translations = {
+  TH: {
+    nav: {
+      home: 'หน้าแรก',
+      my_tickets: 'ตั๋วของฉัน',
+      results: 'ผลรางวัล',
+      profile: 'บัญชีของฉัน',
+      back: 'ย้อนกลับ'
+    },
+    common: {
+      buy: 'ซื้อตั๋ว',
+      checkout: 'ชำระเงิน',
+      summary: 'สรุปรายการสั่งซื้อ',
+      select_lines: 'เลือกจำนวนแถว',
+      add_line: 'เพิ่มแถว',
+      close_in: 'ปิดรับใน',
+      details: 'ดูรายละเอียด',
+      ok: 'ตกลง',
+      all: 'ทั้งหมด'
+    },
+    home: {
+      promo: {
+        title: 'โปรโมชั่นพิเศษ!',
+        desc: 'ซื้อ Powerball วันนี้ ลุ้นรับส่วนลด 50%',
+        button: 'ซื้อเลย'
+      },
+      jackpot_title: 'รางวัลแจ็กพอต',
+      see_all: 'ดูทั้งหมด'
+    },
+    payment: {
+      title: 'ชำระเงิน',
+      total: 'ยอดรวม',
+      confirm: 'ยืนยันการชำระเงิน'
+    },
+    success: {
+      title: 'สั่งซื้อสำเร็จ!',
+      desc: 'เราได้รับคำสั่งซื้อของคุณแล้ว เจ้าหน้าที่จะทำการซื้อตั๋วและอัปโหลดภาพสแกนให้คุณโดยเร็วที่สุด',
+      button: 'ดูตั๋วของฉัน'
+    },
+    tickets: {
+      title: 'ตั๋วของฉัน',
+      tab: {
+        active: 'กำลังดำเนินการ',
+        history: 'ประวัติ'
+      },
+      sort: {
+        date_desc: 'วันที่ซื้อ (ใหม่-เก่า)',
+        date_asc: 'วันที่ซื้อ (เก่า-ใหม่)',
+        draw_desc: 'วันประกาศผล (ใหม่-เก่า)',
+        draw_asc: 'วันประกาศผล (เก่า-ใหม่)'
+      },
+      empty: {
+        active: 'ยังไม่มีตั๋วที่กำลังดำเนินการ',
+        active_desc: 'อย่าพลาดโอกาสเป็นเศรษฐี! เลือกซื้อลอตเตอรี่ที่คุณชื่นชอบได้เลย',
+        history: 'ยังไม่มีประวัติการสั่งซื้อ',
+        history_desc: 'ประวัติการถูกรางวัลและการสั่งซื้อที่ผ่านมาจะแสดงที่นี่',
+        filtered: 'ไม่พบตั๋วตามตัวเลือก',
+        button: 'เลือกซื้อลอตเตอรี่'
+      },
+      view_scan: 'ดูภาพสแกน',
+      purchase_date: 'วันที่ซื้อ',
+      more_lines: 'แถวเพิ่มเติม',
+      modal: {
+        scanned: 'ภาพสแกนตั๋วจริง',
+        result: 'ผลการตรวจรางวัล',
+        processing: 'กำลังดำเนินการ',
+        processing_desc: 'เจ้าหน้าที่กำลังดำเนินการซื้อตั๋วให้คุณ กรุณารอสักครู่...',
+        disclaimer: '*ภาพสแกนนี้เป็นหลักฐานการสั่งซื้อจริงจากตัวแทนในต่างประเทศ'
+      }
+    },
+    results: {
+      title: 'ผลรางวัลล่าสุด',
+      check_payout: 'ดูตารางเงินรางวัล',
+      disclaimer: '*ผลรางวัลอ้างอิงจากเว็บไซต์ทางการ',
+      empty: 'ไม่พบข้อมูลผลรางวัล',
+      empty_desc: 'กรุณากลับมาเช็คใหม่ภายหลัง'
+    },
+    status: {
+      pending: 'รอเจ้าหน้าที่ซื้อตั๋ว (ภายใน 24 ชม.)',
+      purchased: 'ซื้อแล้ว',
+      scanned: 'ตรวจตั๋วแล้ว',
+      win: 'ถูกรางวัล',
+      lose: 'ไม่ถูกรางวัล'
+    },
+    profile: {
+      wallet: {
+        balance: 'ยอดเงินคงเหลือ',
+        topup: 'เติมเงิน'
+      },
+      menu: {
+        history: 'ประวัติการสั่งซื้อ',
+        personal: 'ข้อมูลส่วนตัว',
+        bank: 'ช่องทางรับเงินรางวัล',
+        notif: 'การแจ้งเตือน',
+        contact: 'ติดต่อเรา',
+        logout: 'ออกจากระบบ'
+      }
+    },
+    banner: {
+        guide: {
+            title: 'วิธีการสั่งซื้อ',
+            subtitle: 'ง่ายๆ ใน 3 ขั้นตอน',
+            desc: 'เลือกเลข > เราซื้อให้ > รอรับภาพสแกน',
+            detail: '1. เลือกเกมและตัวเลขที่คุณต้องการ\n2. ชำระเงินผ่านระบบที่ปลอดภัย\n3. ทีมงานของเราในสหรัฐฯ จะไปซื้อตั๋วจริงให้คุณ\n4. เราจะสแกนตั๋วเข้าระบบให้คุณตรวจสอบ\n5. หากถูกรางวัล เงินจะโอนเข้า Wallet ทันที!'
+        },
+        hot: {
+            title: 'JACKPOT แตก!',
+            subtitle: 'Powerball พุ่งทะลุ 700 ล้าน',
+            desc: 'โอกาสรวยเป็นเศรษฐีระดับโลกมาถึงแล้ว',
+            detail: 'รางวัล Jackpot ของ Powerball สะสมต่อเนื่องจนถึงยอด 719 ล้านดอลลาร์สหรัฐ! อย่าพลาดโอกาสเปลี่ยนชีวิต สั่งซื้อก่อนปิดรับ 2 ชั่วโมง'
+        },
+        promo: {
+            title: 'สมาชิกใหม่',
+            subtitle: 'รับโบนัสฟรี $5',
+            desc: 'เมื่อเติมเงินครั้งแรกขั้นต่ำ $20',
+            detail: 'พิเศษสำหรับสมาชิกใหม่ที่สมัครภายในเดือนนี้ เพียงเติมเงินครั้งแรกขั้นต่ำ $20 รับเครดิตเพิ่มฟรีทันที $5 สำหรับซื้อตั๋วใบแรกของคุณ'
+        }
+    }
+  },
+  EN: {
+    nav: {
+      home: 'Home',
+      my_tickets: 'My Tickets',
+      results: 'Results',
+      profile: 'Profile',
+      back: 'Back'
+    },
+    common: {
+      buy: 'Buy Ticket',
+      checkout: 'Checkout',
+      summary: 'Order Summary',
+      select_lines: 'Select Lines',
+      add_line: 'Add Line',
+      close_in: 'Closes in',
+      details: 'See Details',
+      ok: 'OK',
+      all: 'All'
+    },
+    home: {
+      promo: {
+        title: 'Special Promo!',
+        desc: 'Buy Powerball today, get chance for 50% off',
+        button: 'Buy Now'
+      },
+      jackpot_title: 'Top Jackpots',
+      see_all: 'See All'
+    },
+    payment: {
+      title: 'Payment',
+      total: 'Total',
+      confirm: 'Confirm Payment'
+    },
+    success: {
+      title: 'Order Successful!',
+      desc: 'We have received your order. Our staff will purchase the ticket and upload the scan shortly.',
+      button: 'View My Tickets'
+    },
+    tickets: {
+      title: 'My Tickets',
+      tab: {
+        active: 'Active',
+        history: 'History'
+      },
+      sort: {
+        date_desc: 'Purchase Date (Newest)',
+        date_asc: 'Purchase Date (Oldest)',
+        draw_desc: 'Draw Date (Newest)',
+        draw_asc: 'Draw Date (Oldest)'
+      },
+      empty: {
+        active: 'No active tickets',
+        active_desc: 'Don\'t miss the jackpot! Pick your lucky numbers now.',
+        history: 'No purchase history',
+        history_desc: 'Your past tickets and results will appear here.',
+        filtered: 'No tickets found for this filter',
+        button: 'Buy Tickets'
+      },
+      view_scan: 'View Scan',
+      purchase_date: 'Purchased on',
+      more_lines: 'more lines',
+      modal: {
+        scanned: 'Real Scanned Ticket',
+        result: 'Ticket Result',
+        processing: 'Processing',
+        processing_desc: 'Our staff is purchasing your ticket. Please wait...',
+        disclaimer: '*This scan is proof of purchase from our authorized agent.'
+      }
+    },
+    results: {
+      title: 'Latest Results',
+      check_payout: 'View Prize Table',
+      disclaimer: '*Results reference official lottery sites',
+      empty: 'No results available',
+      empty_desc: 'Please check back later'
+    },
+    status: {
+      pending: 'Waiting for purchase (within 24hrs)',
+      purchased: 'Purchased',
+      scanned: 'Scanned',
+      win: 'You Won!',
+      lose: 'Not a winner'
+    },
+    profile: {
+      wallet: {
+        balance: 'Balance',
+        topup: 'Top Up'
+      },
+      menu: {
+        history: 'Order History',
+        personal: 'Personal Info',
+        bank: 'Payout Channels',
+        notif: 'Notifications',
+        contact: 'Contact Support',
+        logout: 'Log Out'
+      }
+    },
+    banner: {
+        guide: {
+            title: 'How it Works',
+            subtitle: 'Simple 3 Steps',
+            desc: 'Pick Numbers > We Buy > View Scan',
+            detail: '1. Choose your game and numbers.\n2. Securely checkout.\n3. Our US team buys the physical ticket.\n4. We scan and upload it to your account.\n5. Winnings are transferred automatically!'
+        },
+        hot: {
+            title: 'JACKPOT ALERT',
+            subtitle: 'Powerball hits $700M',
+            desc: 'Your chance to become a global billionaire.',
+            detail: 'The Powerball jackpot has rolled over to a massive $719 Million! Don\'t miss out. Sales close 2 hours before the draw.'
+        },
+        promo: {
+            title: 'New Members',
+            subtitle: 'Get Free $5',
+            desc: 'On first deposit of $20+',
+            detail: 'Exclusive for new members this month. Deposit at least $20 and receive an instant $5 bonus credit for your first ticket.'
+        }
+    }
+  },
+  ES: {
+  "nav": {
+    "home": "Inicio",
+    "my_tickets": "Mis Boletos",
+    "results": "Resultados",
+    "profile": "Perfil",
+    "back": "Volver"
+  },
+  "common": {
+    "buy": "Comprar Boleto",
+    "checkout": "Pagar",
+    "summary": "Resumen del Pedido",
+    "select_lines": "Seleccionar Líneas",
+    "add_line": "Añadir Línea",
+    "close_in": "Cierra en",
+    "details": "Ver Detalles",
+    "ok": "OK",
+    "all": "Todo"
+  },
+  "home": {
+    "promo": {
+      "title": "¡Promoción Especial!",
+      "desc": "Compra Powerball hoy, obtén oportunidad del 50% de descuento",
+      "button": "Comprar Ahora"
+    },
+    "jackpot_title": "Mejores Botes",
+    "see_all": "Ver Todo"
+  },
+  "payment": {
+    "title": "Pago",
+    "total": "Total",
+    "confirm": "Confirmar Pago"
+  },
+  "success": {
+    "title": "¡Pedido Exitoso!",
+    "desc": "Hemos recibido su pedido. Nuestro personal comprará el boleto y subirá el escaneo en breve.",
+    "button": "Ver Mis Boletos"
+  },
+  "tickets": {
+    "title": "Mis Boletos",
+    "tab": {
+      "active": "Activo",
+      "history": "Historial"
+    },
+    "sort": {
+      "date_desc": "Fecha de Compra (Más reciente)",
+      "date_asc": "Fecha de Compra (Más antigua)",
+      "draw_desc": "Fecha del Sorteo (Más reciente)",
+      "draw_asc": "Fecha del Sorteo (Más antigua)"
+    },
+    "empty": {
+      "active": "No hay boletos activos",
+      "active_desc": "¡No te pierdas el bote! Elige tus números de la suerte ahora.",
+      "history": "Sin historial de compras",
+      "history_desc": "Tus boletos pasados y resultados aparecerán aquí.",
+      "filtered": "No se encontraron boletos para este filtro",
+      "button": "Comprar Boletos"
+    },
+    "view_scan": "Ver Escaneo",
+    "purchase_date": "Comprado el",
+    "more_lines": "más líneas",
+    "modal": {
+      "scanned": "Boleto Real Escaneado",
+      "result": "Resultado del Boleto",
+      "processing": "Procesando",
+      "processing_desc": "Nuestro personal está comprando su boleto. Por favor espere...",
+      "disclaimer": "*Este escaneo es prueba de compra de nuestro agente autorizado."
+    }
+  },
+  "results": {
+    "title": "Últimos Resultados",
+    "check_payout": "Ver Tabla de Premios",
+    "disclaimer": "*Los resultados hacen referencia a sitios oficiales de lotería",
+    "empty": "No hay resultados disponibles",
+    "empty_desc": "Por favor vuelva más tarde"
+  },
+  "status": {
+    "pending": "Esperando compra (en 24h)",
+    "purchased": "Comprado",
+    "scanned": "Escaneado",
+    "win": "¡Ganaste!",
+    "lose": "No ganador"
+  },
+  "profile": {
+    "wallet": {
+      "balance": "Saldo",
+      "topup": "Recargar"
+    },
+    "menu": {
+      "history": "Historial de Pedidos",
+      "personal": "Información Personal",
+      "bank": "Canales de Pago",
+      "notif": "Notificaciones",
+      "contact": "Contactar Soporte",
+      "logout": "Cerrar Sesión"
+    }
+  },
+  "banner": {
+    "guide": {
+      "title": "Cómo Funciona",
+      "subtitle": "3 Pasos Simples",
+      "desc": "Elige Números > Compramos > Ver Escaneo",
+      "detail": "1. Elige tu juego y números.\n2. Paga de forma segura.\n3. Nuestro equipo en EE.UU. compra el boleto físico.\n4. Lo escaneamos y subimos a tu cuenta.\n5. ¡Las ganancias se transfieren automáticamente!"
+    },
+    "hot": {
+      "title": "ALERTA DE BOTE",
+      "subtitle": "Powerball alcanza $700M",
+      "desc": "Tu oportunidad de ser multimillonario global.",
+      "detail": "El bote de Powerball se ha acumulado a unos masivos $719 Millones! No te lo pierdas. Las ventas cierran 2 horas antes del sorteo."
+    },
+    "promo": {
+      "title": "Nuevos Miembros",
+      "subtitle": "Obtén $5 Gratis",
+      "desc": "En primer depósito de $20+",
+      "detail": "Exclusivo para nuevos miembros este mes. Deposita al menos $20 y recibe un bono instantáneo de $5 para tu primer boleto."
+    }
+  }
+},
+  FR: {
+  "nav": {
+    "home": "Accueil",
+    "my_tickets": "Mes Billets",
+    "results": "Résultats",
+    "profile": "Profil",
+    "back": "Retour"
+  },
+  "common": {
+    "buy": "Acheter Billet",
+    "checkout": "Caisse",
+    "summary": "Résumé de la Commande",
+    "select_lines": "Sélectionner Lignes",
+    "add_line": "Ajouter Ligne",
+    "close_in": "Ferme dans",
+    "details": "Voir Détails",
+    "ok": "OK",
+    "all": "Tout"
+  },
+  "home": {
+    "promo": {
+      "title": "Promo Spéciale !",
+      "desc": "Achetez Powerball aujourd'hui, chance d'avoir 50% de réduction",
+      "button": "Acheter Maintenant"
+    },
+    "jackpot_title": "Meilleurs Jackpots",
+    "see_all": "Voir Tout"
+  },
+  "payment": {
+    "title": "Paiement",
+    "total": "Total",
+    "confirm": "Confirmer Paiement"
+  },
+  "success": {
+    "title": "Commande Réussie !",
+    "desc": "Nous avons reçu votre commande. Notre personnel achètera le billet et téléchargera le scan sous peu.",
+    "button": "Voir Mes Billets"
+  },
+  "tickets": {
+    "title": "Mes Billets",
+    "tab": {
+      "active": "Actif",
+      "history": "Historique"
+    },
+    "sort": {
+      "date_desc": "Date d'Achat (Récent)",
+      "date_asc": "Date d'Achat (Ancien)",
+      "draw_desc": "Date de Tirage (Récent)",
+      "draw_asc": "Date de Tirage (Ancien)"
+    },
+    "empty": {
+      "active": "Pas de billets actifs",
+      "active_desc": "Ne manquez pas le jackpot ! Choisissez vos numéros porte-bonheur maintenant.",
+      "history": "Pas d'historique d'achat",
+      "history_desc": "Vos anciens billets et résultats apparaîtront ici.",
+      "filtered": "Aucun billet trouvé pour ce filtre",
+      "button": "Acheter Billets"
+    },
+    "view_scan": "Voir Scan",
+    "purchase_date": "Acheté le",
+    "more_lines": "plus de lignes",
+    "modal": {
+      "scanned": "Billet Réel Scanné",
+      "result": "Résultat du Billet",
+      "processing": "Traitement",
+      "processing_desc": "Notre personnel achète votre billet. Veuillez patienter...",
+      "disclaimer": "*Ce scan est une preuve d'achat de notre agent autorisé."
+    }
+  },
+  "results": {
+    "title": "Derniers Résultats",
+    "check_payout": "Voir Tableau des Prix",
+    "disclaimer": "*Les résultats font référence aux sites officiels de loterie",
+    "empty": "Pas de résultats disponibles",
+    "empty_desc": "Veuillez vérifier plus tard"
+  },
+  "status": {
+    "pending": "En attente d'achat (sous 24h)",
+    "purchased": "Acheté",
+    "scanned": "Scanné",
+    "win": "Vous avez gagné !",
+    "lose": "Pas gagnant"
+  },
+  "profile": {
+    "wallet": {
+      "balance": "Solde",
+      "topup": "Recharger"
+    },
+    "menu": {
+      "history": "Historique des Commandes",
+      "personal": "Infos Personnelles",
+      "bank": "Canaux de Paiement",
+      "notif": "Notifications",
+      "contact": "Contacter Support",
+      "logout": "Déconnexion"
+    }
+  },
+  "banner": {
+    "guide": {
+      "title": "Comment ça marche",
+      "subtitle": "3 Étapes Simples",
+      "desc": "Choisissez Numéros > Nous Achetons > Voir Scan",
+      "detail": "1. Choisissez votre jeu et vos numéros.\n2. Payez en toute sécurité.\n3. Notre équipe aux USA achète le billet physique.\n4. Nous le scannons et le téléchargeons sur votre compte.\n5. Les gains sont transférés automatiquement !"
+    },
+    "hot": {
+      "title": "ALERTE JACKPOT",
+      "subtitle": "Powerball atteint 700M$",
+      "desc": "Votre chance de devenir milliardaire mondial.",
+      "detail": "Le jackpot Powerball a atteint un montant massif de 719 Millions $ ! Ne manquez pas ça. Les ventes ferment 2 heures avant le tirage."
+    },
+    "promo": {
+      "title": "Nouveaux Membres",
+      "subtitle": "Obtenez 5$ Gratuits",
+      "desc": "Sur premier dépôt de 20$+",
+      "detail": "Exclusif pour les nouveaux membres ce mois-ci. Déposez au moins 20$ et recevez un crédit bonus instantané de 5$ pour votre premier billet."
+    }
+  }
+},
+  DE: {
+  "nav": {
+    "home": "Startseite",
+    "my_tickets": "Meine Tickets",
+    "results": "Ergebnisse",
+    "profile": "Profil",
+    "back": "Zurück"
+  },
+  "common": {
+    "buy": "Ticket Kaufen",
+    "checkout": "Kasse",
+    "summary": "Bestellübersicht",
+    "select_lines": "Zeilen Auswählen",
+    "add_line": "Zeile Hinzufügen",
+    "close_in": "Schließt in",
+    "details": "Details Sehen",
+    "ok": "OK",
+    "all": "Alle"
+  },
+  "home": {
+    "promo": {
+      "title": "Sonderangebot!",
+      "desc": "Powerball heute kaufen, Chance auf 50% Rabatt",
+      "button": "Jetzt Kaufen"
+    },
+    "jackpot_title": "Top Jackpots",
+    "see_all": "Alle Sehen"
+  },
+  "payment": {
+    "title": "Zahlung",
+    "total": "Gesamt",
+    "confirm": "Zahlung Bestätigen"
+  },
+  "success": {
+    "title": "Bestellung Erfolgreich!",
+    "desc": "Wir haben Ihre Bestellung erhalten. Unser Personal wird das Ticket kaufen und den Scan in Kürze hochladen.",
+    "button": "Meine Tickets Ansehen"
+  },
+  "tickets": {
+    "title": "Meine Tickets",
+    "tab": {
+      "active": "Aktiv",
+      "history": "Verlauf"
+    },
+    "sort": {
+      "date_desc": "Kaufdatum (Neueste)",
+      "date_asc": "Kaufdatum (Älteste)",
+      "draw_desc": "Ziehungsdatum (Neueste)",
+      "draw_asc": "Ziehungsdatum (Älteste)"
+    },
+    "empty": {
+      "active": "Keine aktiven Tickets",
+      "active_desc": "Verpassen Sie nicht den Jackpot! Wählen Sie jetzt Ihre Glückszahlen.",
+      "history": "Kein Kaufverlauf",
+      "history_desc": "Ihre vergangenen Tickets und Ergebnisse erscheinen hier.",
+      "filtered": "Keine Tickets für diesen Filter gefunden",
+      "button": "Tickets Kaufen"
+    },
+    "view_scan": "Scan Ansehen",
+    "purchase_date": "Gekauft am",
+    "more_lines": "weitere Zeilen",
+    "modal": {
+      "scanned": "Echtes Gescanntes Ticket",
+      "result": "Ticket Ergebnis",
+      "processing": "Verarbeitung",
+      "processing_desc": "Unser Personal kauft Ihr Ticket. Bitte warten...",
+      "disclaimer": "*Dieser Scan ist ein Kaufbeleg von unserem autorisierten Vertreter."
+    }
+  },
+  "results": {
+    "title": "Neueste Ergebnisse",
+    "check_payout": "Gewinntabelle Ansehen",
+    "disclaimer": "*Ergebnisse beziehen sich auf offizielle Lotterieseiten",
+    "empty": "Keine Ergebnisse verfügbar",
+    "empty_desc": "Bitte später prüfen"
+  },
+  "status": {
+    "pending": "Warten auf Kauf (innerhalb 24h)",
+    "purchased": "Gekauft",
+    "scanned": "Gescannt",
+    "win": "Gewonnen!",
+    "lose": "Nicht gewonnen"
+  },
+  "profile": {
+    "wallet": {
+      "balance": "Guthaben",
+      "topup": "Aufladen"
+    },
+    "menu": {
+      "history": "Bestellverlauf",
+      "personal": "Persönliche Infos",
+      "bank": "Auszahlungskanäle",
+      "notif": "Benachrichtigungen",
+      "contact": "Support Kontaktieren",
+      "logout": "Abmelden"
+    }
+  },
+  "banner": {
+    "guide": {
+      "title": "Wie es funktioniert",
+      "subtitle": "3 Einfache Schritte",
+      "desc": "Zahlen Wählen > Wir Kaufen > Scan Ansehen",
+      "detail": "1. Wählen Sie Ihr Spiel und Ihre Zahlen.\n2. Sicher bezahlen.\n3. Unser Team in den USA kauft das physische Ticket.\n4. Wir scannen es und laden es in Ihr Konto hoch.\n5. Gewinne werden automatisch überwiesen!"
+    },
+    "hot": {
+      "title": "JACKPOT ALARM",
+      "subtitle": "Powerball erreicht $700M",
+      "desc": "Ihre Chance, globaler Milliardär zu werden.",
+      "detail": "Der Powerball-Jackpot ist auf massive $719 Millionen angestiegen! Nicht verpassen. Verkauf endet 2 Stunden vor der Ziehung."
+    },
+    "promo": {
+      "title": "Neue Mitglieder",
+      "subtitle": "Erhalten Sie $5 Gratis",
+      "desc": "Bei erster Einzahlung von $20+",
+      "detail": "Exclusiv für neue Mitglieder diesen Monat. Zahlen Sie mindestens $20 ein und erhalten Sie sofort $5 Bonusguthaben für Ihr erstes Ticket."
+    }
+  }
+},
+  IT: {
+  "nav": {
+    "home": "Home",
+    "my_tickets": "I Miei Biglietti",
+    "results": "Risultati",
+    "profile": "Profilo",
+    "back": "Indietro"
+  },
+  "common": {
+    "buy": "Compra Biglietto",
+    "checkout": "Cassa",
+    "summary": "Riepilogo Ordine",
+    "select_lines": "Seleziona Linee",
+    "add_line": "Aggiungi Linea",
+    "close_in": "Chiude tra",
+    "details": "Vedi Dettagli",
+    "ok": "OK",
+    "all": "Tutto"
+  },
+  "home": {
+    "promo": {
+      "title": "Promo Speciale!",
+      "desc": "Compra Powerball oggi, possibilità del 50% di sconto",
+      "button": "Compra Ora"
+    },
+    "jackpot_title": "Migliori Jackpot",
+    "see_all": "Vedi Tutto"
+  },
+  "payment": {
+    "title": "Pagamento",
+    "total": "Totale",
+    "confirm": "Conferma Pagamento"
+  },
+  "success": {
+    "title": "Ordine Riuscito!",
+    "desc": "Abbiamo ricevuto il tuo ordine. Il nostro staff acquisterà il biglietto e caricherà la scansione a breve.",
+    "button": "Vedi I Miei Biglietti"
+  },
+  "tickets": {
+    "title": "I Miei Biglietti",
+    "tab": {
+      "active": "Attivi",
+      "history": "Storico"
+    },
+    "sort": {
+      "date_desc": "Data Acquisto (Recente)",
+      "date_asc": "Data Acquisto (Meno Recente)",
+      "draw_desc": "Data Estrazione (Recente)",
+      "draw_asc": "Data Estrazione (Meno Recente)"
+    },
+    "empty": {
+      "active": "Nessun biglietto attivo",
+      "active_desc": "Non perdere il jackpot! Scegli i tuoi numeri fortunati ora.",
+      "history": "Nessuno storico acquisti",
+      "history_desc": "I tuoi biglietti passati e i risultati appariranno qui.",
+      "filtered": "Nessun biglietto trovato per questo filtro",
+      "button": "Compra Biglietti"
+    },
+    "view_scan": "Vedi Scansione",
+    "purchase_date": "Acquistato il",
+    "more_lines": "altre linee",
+    "modal": {
+      "scanned": "Biglietto Reale Scansionato",
+      "result": "Risultato Biglietto",
+      "processing": "Elaborazione",
+      "processing_desc": "Il nostro staff sta acquistando il tuo biglietto. Attendere prego...",
+      "disclaimer": "*Questa scansione è la prova di acquisto dal nostro agente autorizzato."
+    }
+  },
+  "results": {
+    "title": "Ultimi Risultati",
+    "check_payout": "Vedi Tabella Premi",
+    "disclaimer": "*I risultati fanno riferimento ai siti ufficiali della lotteria",
+    "empty": "Nessun risultato disponibile",
+    "empty_desc": "Si prega di controllare più tardi"
+  },
+  "status": {
+    "pending": "In attesa di acquisto (entro 24h)",
+    "purchased": "Acquistato",
+    "scanned": "Scansionato",
+    "win": "Hai Vinto!",
+    "lose": "Non vincente"
+  },
+  "profile": {
+    "wallet": {
+      "balance": "Saldo",
+      "topup": "Ricarica"
+    },
+    "menu": {
+      "history": "Storico Ordini",
+      "personal": "Info Personali",
+      "bank": "Canali di Pagamento",
+      "notif": "Notifiche",
+      "contact": "Contatta Supporto",
+      "logout": "Esci"
+    }
+  },
+  "banner": {
+    "guide": {
+      "title": "Come Funziona",
+      "subtitle": "3 Semplici Passi",
+      "desc": "Scegli Numeri > Noi Compriamo > Vedi Scansione",
+      "detail": "1. Scegli il tuo gioco e i numeri.\n2. Paga in sicurezza.\n3. Il nostro team negli USA acquista il biglietto fisico.\n4. Lo scansioniamo e lo carichiamo sul tuo account.\n5. Le vincite vengono trasferite automaticamente!"
+    },
+    "hot": {
+      "title": "ALLARME JACKPOT",
+      "subtitle": "Powerball tocca $700M",
+      "desc": "La tua occasione per diventare miliardario globale.",
+      "detail": "Il jackpot Powerball è salito a ben $719 Milioni! Non perdere l'occasione. Le vendite chiudono 2 ore prima dell'estrazione."
+    },
+    "promo": {
+      "title": "Nuovi Membri",
+      "subtitle": "Ottieni $5 Gratis",
+      "desc": "Sul primo deposito di $20+",
+      "detail": "Esclusivo per i nuovi membri questo mese. Deposita almeno $20 e ricevi un credito bonus istantaneo di $5 per il tuo primo biglietto."
+    }
+  }
+},
+  PT: {
+  "nav": {
+    "home": "Início",
+    "my_tickets": "Meus Bilhetes",
+    "results": "Resultados",
+    "profile": "Perfil",
+    "back": "Voltar"
+  },
+  "common": {
+    "buy": "Comprar Bilhete",
+    "checkout": "Checkout",
+    "summary": "Resumo do Pedido",
+    "select_lines": "Selecionar Linhas",
+    "add_line": "Adicionar Linha",
+    "close_in": "Fecha em",
+    "details": "Ver Detalhes",
+    "ok": "OK",
+    "all": "Tudo"
+  },
+  "home": {
+    "promo": {
+      "title": "Promoção Especial!",
+      "desc": "Compre Powerball hoje, chance de 50% de desconto",
+      "button": "Comprar Agora"
+    },
+    "jackpot_title": "Melhores Jackpots",
+    "see_all": "Ver Tudo"
+  },
+  "payment": {
+    "title": "Pagamento",
+    "total": "Total",
+    "confirm": "Confirmar Pagamento"
+  },
+  "success": {
+    "title": "Pedido com Sucesso!",
+    "desc": "Recebemos seu pedido. Nossa equipe comprará o bilhete e enviará a digitalização em breve.",
+    "button": "Ver Meus Bilhetes"
+  },
+  "tickets": {
+    "title": "Meus Bilhetes",
+    "tab": {
+      "active": "Ativos",
+      "history": "Histórico"
+    },
+    "sort": {
+      "date_desc": "Data de Compra (Mais recente)",
+      "date_asc": "Data de Compra (Mais antiga)",
+      "draw_desc": "Data do Sorteio (Mais recente)",
+      "draw_asc": "Data do Sorteio (Mais antiga)"
+    },
+    "empty": {
+      "active": "Nenhum bilhete ativo",
+      "active_desc": "Não perca o jackpot! Escolha seus números da sorte agora.",
+      "history": "Sem histórico de compras",
+      "history_desc": "Seus bilhetes passados e resultados aparecerão aqui.",
+      "filtered": "Nenhum bilhete encontrado para este filtro",
+      "button": "Comprar Bilhetes"
+    },
+    "view_scan": "Ver Digitalização",
+    "purchase_date": "Comprado em",
+    "more_lines": "mais linhas",
+    "modal": {
+      "scanned": "Bilhete Real Digitalizado",
+      "result": "Resultado do Bilhete",
+      "processing": "Processando",
+      "processing_desc": "Nossa equipe está comprando seu bilhete. Por favor aguarde...",
+      "disclaimer": "*Esta digitalização é prova de compra do nosso agente autorizado."
+    }
+  },
+  "results": {
+    "title": "Últimos Resultados",
+    "check_payout": "Ver Tabela de Prêmios",
+    "disclaimer": "*Os resultados referem-se aos sites oficiais de loteria",
+    "empty": "Nenhum resultado disponível",
+    "empty_desc": "Por favor verifique mais tarde"
+  },
+  "status": {
+    "pending": "Aguardando compra (em 24h)",
+    "purchased": "Comprado",
+    "digitalized": "Digitalizado",
+    "win": "Você Ganhou!",
+    "lose": "Não premiado"
+  },
+  "profile": {
+    "wallet": {
+      "balance": "Saldo",
+      "topup": "Recarregar"
+    },
+    "menu": {
+      "history": "Histórico de Pedidos",
+      "personal": "Info Pessoal",
+      "bank": "Canais de Pagamento",
+      "notif": "Notificações",
+      "contact": "Contatar Suporte",
+      "logout": "Sair"
+    }
+  },
+  "banner": {
+    "guide": {
+      "title": "Como Funciona",
+      "subtitle": "3 Passos Simples",
+      "desc": "Escolha Números > Nós Compramos > Ver Digitalização",
+      "detail": "1. Escolha seu jogo e números.\n2. Pague com segurança.\n3. Nossa equipe nos EUA compra o bilhete físico.\n4. Digitalizamos e enviamos para sua conta.\n5. Os ganhos são transferidos automaticamente!"
+    },
+    "hot": {
+      "title": "ALERTA DE JACKPOT",
+      "subtitle": "Powerball atinge $700M",
+      "desc": "Sua chance de se tornar um bilionário global.",
+      "detail": "O jackpot da Powerball acumulou para massivos $719 Milhões! Não perca. As vendas encerram 2 horas antes do sorteio."
+    },
+    "promo": {
+      "title": "Novos Membros",
+      "subtitle": "Ganhe $5 Grátis",
+      "desc": "No primeiro depósito de $20+",
+      "detail": "Exclusivo para novos membros este mês. Deposite pelo menos $20 e receba um crédito bônus instantâneo de $5 para seu primeiro bilhete."
+    }
+  }
+},
+  RU: {
+  "nav": {
+    "home": "Главная",
+    "my_tickets": "Мои Билеты",
+    "results": "Результаты",
+    "profile": "Профиль",
+    "back": "Назад"
+  },
+  "common": {
+    "buy": "Купить Билет",
+    "checkout": "Оплата",
+    "summary": "Итог Заказа",
+    "select_lines": "Выбрать Линии",
+    "add_line": "Добавить Линию",
+    "close_in": "Закрывается через",
+    "details": "Подробнее",
+    "ok": "ОК",
+    "all": "Все"
+  },
+  "home": {
+    "promo": {
+      "title": "Спецпредложение!",
+      "desc": "Купи Powerball сегодня, шанс на скидку 50%",
+      "button": "Купить Сейчас"
+    },
+    "jackpot_title": "Топ Джекпоты",
+    "see_all": "Смотреть Все"
+  },
+  "payment": {
+    "title": "Оплата",
+    "total": "Итого",
+    "confirm": "Подтвердить Оплату"
+  },
+  "success": {
+    "title": "Заказ Успешен!",
+    "desc": "Мы получили ваш заказ. Наши сотрудники купят билет и загрузят скан в ближайшее время.",
+    "button": "Смотреть Мои Билеты"
+  },
+  "tickets": {
+    "title": "Мои Билеты",
+    "tab": {
+      "active": "Активные",
+      "history": "История"
+    },
+    "sort": {
+      "date_desc": "Дата Покупки (Новые)",
+      "date_asc": "Дата Покупки (Старые)",
+      "draw_desc": "Дата Розыгрыша (Новые)",
+      "draw_asc": "Дата Розыгрыша (Старые)"
+    },
+    "empty": {
+      "active": "Нет активных билетов",
+      "active_desc": "Не упустите джекпот! Выберите свои счастливые номера сейчас.",
+      "history": "Нет истории покупок",
+      "history_desc": "Ваши прошлые билеты и результаты появятся здесь.",
+      "filtered": "Билеты не найдены по этому фильтру",
+      "button": "Купить Билеты"
+    },
+    "view_scan": "Смотреть Скан",
+    "purchase_date": "Куплено",
+    "more_lines": "еще линии",
+    "modal": {
+      "scanned": "Реальный Скан Билета",
+      "result": "Результат Билета",
+      "processing": "Обработка",
+      "processing_desc": "Наши сотрудники покупают ваш билет. Пожалуйста, подождите...",
+      "disclaimer": "*Этот скан является подтверждением покупки от нашего авторизованного агента."
+    }
+  },
+  "results": {
+    "title": "Последние Результаты",
+    "check_payout": "Таблица Выплат",
+    "disclaimer": "*Результаты ссылаются на официальные сайты лотерей",
+    "empty": "Нет доступных результатов",
+    "empty_desc": "Пожалуйста, проверьте позже"
+  },
+  "status": {
+    "pending": "Ожидание покупки (в теч. 24ч)",
+    "purchased": "Куплено",
+    "scanned": "Сканировано",
+    "win": "Вы Выиграли!",
+    "lose": "Не выиграл"
+  },
+  "profile": {
+    "wallet": {
+      "balance": "Баланс",
+      "topup": "Пополнить"
+    },
+    "menu": {
+      "history": "История Заказов",
+      "personal": "Личная Инфо",
+      "bank": "Каналы Выплат",
+      "notif": "Уведомления",
+      "contact": "Поддержка",
+      "logout": "Выйти"
+    }
+  },
+  "banner": {
+    "guide": {
+      "title": "Как это работает",
+      "subtitle": "3 Простых Шага",
+      "desc": "Выберите Числа > Мы Покупаем > Смотрите Скан",
+      "detail": "1. Выберите игру и числа.\n2. Безопасно оплатите.\n3. Наша команда в США покупает физический билет.\n4. Мы сканируем и загружаем его в ваш аккаунт.\n5. Выигрыши переводятся автоматически!"
+    },
+    "hot": {
+      "title": "ДЖЕКПОТ АЛЕРТ",
+      "subtitle": "Powerball достиг $700M",
+      "desc": "Ваш шанс стать глобальным миллиардером.",
+      "detail": "Джекпот Powerball вырос до огромных $719 Миллионов! Не пропустите. Продажи закрываются за 2 часа до розыгрыша."
+    },
+    "promo": {
+      "title": "Новые Участники",
+      "subtitle": "Получите $5 Бесплатно",
+      "desc": "При первом депозите от $20",
+      "detail": "Эксклюзивно для новых участников в этом месяце. Внесите депозит не менее $20 и получите мгновенный бонус $5 на ваш первый билет."
+    }
+  }
+},
+  JA: {
+  "nav": {
+    "home": "ホーム",
+    "my_tickets": "マイチケット",
+    "results": "結果",
+    "profile": "プロフィール",
+    "back": "戻る"
+  },
+  "common": {
+    "buy": "チケット購入",
+    "checkout": "支払い",
+    "summary": "注文概要",
+    "select_lines": "ライン選択",
+    "add_line": "ライン追加",
+    "close_in": "締切まで",
+    "details": "詳細を見る",
+    "ok": "OK",
+    "all": "すべて"
+  },
+  "home": {
+    "promo": {
+      "title": "特別プロモ！",
+      "desc": "今日Powerballを買うと、50%オフのチャンス",
+      "button": "今すぐ購入"
+    },
+    "jackpot_title": "トップジャックポット",
+    "see_all": "すべて見る"
+  },
+  "payment": {
+    "title": "支払い",
+    "total": "合計",
+    "confirm": "支払いを確定"
+  },
+  "success": {
+    "title": "注文成功！",
+    "desc": "注文を受け付けました。スタッフがチケットを購入し、スキャンをアップロードします。",
+    "button": "マイチケットを見る"
+  },
+  "tickets": {
+    "title": "マイチケット",
+    "tab": {
+      "active": "アクティブ",
+      "history": "履歴"
+    },
+    "sort": {
+      "date_desc": "購入日 (新しい順)",
+      "date_asc": "購入日 (古い順)",
+      "draw_desc": "抽選日 (新しい順)",
+      "draw_asc": "抽選日 (古い順)"
+    },
+    "empty": {
+      "active": "アクティブなチケットはありません",
+      "active_desc": "ジャックポットをお見逃しなく！今すぐラッキーナンバーを選びましょう。",
+      "history": "購入履歴がありません",
+      "history_desc": "過去のチケットと結果がここに表示されます。",
+      "filtered": "フィルターに一致するチケットがありません",
+      "button": "チケットを購入"
+    },
+    "view_scan": "スキャンを見る",
+    "purchase_date": "購入日",
+    "more_lines": "その他のライン",
+    "modal": {
+      "scanned": "実際のチケットスキャン",
+      "result": "チケット結果",
+      "processing": "処理中",
+      "processing_desc": "スタッフがチケットを購入しています。お待ちください...",
+      "disclaimer": "*このスキャンは正規代理店からの購入証明です。"
+    }
+  },
+  "results": {
+    "title": "最新の結果",
+    "check_payout": "配当表を見る",
+    "disclaimer": "*結果は公式宝くじサイトを参照しています",
+    "empty": "結果はありません",
+    "empty_desc": "後で確認してください"
+  },
+  "status": {
+    "pending": "購入待ち (24時間以内)",
+    "purchased": "購入済み",
+    "scanned": "スキャン済み",
+    "win": "当選！",
+    "lose": "ハズレ"
+  },
+  "profile": {
+    "wallet": {
+      "balance": "残高",
+      "topup": "チャージ"
+    },
+    "menu": {
+      "history": "注文履歴",
+      "personal": "個人情報",
+      "bank": "支払先",
+      "notif": "通知",
+      "contact": "サポートへ連絡",
+      "logout": "ログアウト"
+    }
+  },
+  "banner": {
+    "guide": {
+      "title": "仕組み",
+      "subtitle": "簡単3ステップ",
+      "desc": "数字を選ぶ > 私たちが購入 > スキャンを見る",
+      "detail": "1. ゲームと数字を選びます。\n2. 安全に支払います。\n3. 米国のチームが物理的なチケットを購入します。\n4. スキャンしてアカウントにアップロードします。\n5. 当選金は自動的に送金されます！"
+    },
+    "hot": {
+      "title": "ジャックポット速報",
+      "subtitle": "Powerballが7億ドル到達",
+      "desc": "世界的な億万長者になるチャンス。",
+      "detail": "Powerballのジャックポットが7億1900万ドルに達しました！お見逃しなく。販売は抽選の2時間前に終了します。"
+    },
+    "promo": {
+      "title": "新規メンバー",
+      "subtitle": "$5無料ゲット",
+      "desc": "初回$20以上の入金で",
+      "detail": "今月の新規メンバー限定。$20以上入金すると、最初のチケット用に$5のボーナスクレジットを即座に受け取れます。"
+    }
+  }
+},
+  KO: {
+  "nav": {
+    "home": "홈",
+    "my_tickets": "내 티켓",
+    "results": "결과",
+    "profile": "프로필",
+    "back": "뒤로"
+  },
+  "common": {
+    "buy": "티켓 구매",
+    "checkout": "결제",
+    "summary": "주문 요약",
+    "select_lines": "라인 선택",
+    "add_line": "라인 추가",
+    "close_in": "마감까지",
+    "details": "상세 보기",
+    "ok": "확인",
+    "all": "전체"
+  },
+  "home": {
+    "promo": {
+      "title": "특별 프로모션!",
+      "desc": "오늘 파워볼 구매 시 50% 할인 기회",
+      "button": "지금 구매"
+    },
+    "jackpot_title": "인기 잭팟",
+    "see_all": "모두 보기"
+  },
+  "payment": {
+    "title": "결제",
+    "total": "합계",
+    "confirm": "결제 확인"
+  },
+  "success": {
+    "title": "주문 성공!",
+    "desc": "주문이 접수되었습니다. 직원이 티켓을 구매하고 스캔을 곧 업로드할 것입니다.",
+    "button": "내 티켓 보기"
+  },
+  "tickets": {
+    "title": "내 티켓",
+    "tab": {
+      "active": "진행 중",
+      "history": "내역"
+    },
+    "sort": {
+      "date_desc": "구매일 (최신순)",
+      "date_asc": "구매일 (오래된순)",
+      "draw_desc": "추첨일 (최신순)",
+      "draw_asc": "추첨일 (오래된순)"
+    },
+    "empty": {
+      "active": "진행 중인 티켓 없음",
+      "active_desc": "잭팟을 놓치지 마세요! 행운의 번호를 지금 선택하세요.",
+      "history": "구매 내역 없음",
+      "history_desc": "과거 티켓과 결과가 여기에 표시됩니다.",
+      "filtered": "필터에 맞는 티켓 없음",
+      "button": "티켓 구매"
+    },
+    "view_scan": "스캔 보기",
+    "purchase_date": "구매일",
+    "more_lines": "추가 라인",
+    "modal": {
+      "scanned": "실제 티켓 스캔",
+      "result": "티켓 결과",
+      "processing": "처리 중",
+      "processing_desc": "직원이 티켓을 구매 중입니다. 잠시만 기다려주세요...",
+      "disclaimer": "*이 스캔은 공인 대리점의 구매 증명입니다."
+    }
+  },
+  "results": {
+    "title": "최신 결과",
+    "check_payout": "당첨금 표 보기",
+    "disclaimer": "*결과는 공식 복권 사이트를 참조합니다",
+    "empty": "결과 없음",
+    "empty_desc": "나중에 확인해주세요"
+  },
+  "status": {
+    "pending": "구매 대기 (24시간 내)",
+    "purchased": "구매 완료",
+    "scanned": "스캔 완료",
+    "win": "당첨!",
+    "lose": "낙첨"
+  },
+  "profile": {
+    "wallet": {
+      "balance": "잔액",
+      "topup": "충전"
+    },
+    "menu": {
+      "history": "주문 내역",
+      "personal": "개인 정보",
+      "bank": "출금 채널",
+      "notif": "알림",
+      "contact": "고객 지원",
+      "logout": "로그아웃"
+    }
+  },
+  "banner": {
+    "guide": {
+      "title": "이용 방법",
+      "subtitle": "간단한 3단계",
+      "desc": "번호 선택 > 대리 구매 > 스캔 확인",
+      "detail": "1. 게임과 번호를 선택하세요.\n2. 안전하게 결제하세요.\n3. 미국 팀이 실물 티켓을 구매합니다.\n4. 스캔하여 계정에 업로드합니다.\n5. 당첨금은 자동으로 이체됩니다!"
+    },
+    "hot": {
+      "title": "잭팟 알림",
+      "subtitle": "파워볼 7억 달러 돌파",
+      "desc": "글로벌 억만장자가 될 기회.",
+      "detail": "파워볼 잭팟이 무려 7억 1900만 달러로 이월되었습니다! 놓치지 마세요. 판매는 추첨 2시간 전에 마감됩니다。"
+    },
+    "promo": {
+      "title": "신규 회원",
+      "subtitle": "$5 무료 증정",
+      "desc": "첫 $20 이상 입금 시",
+      "detail": "이번 달 신규 회원 전용. $20 이상 입금하고 첫 티켓을 위한 $5 보너스 크레딧을 즉시 받으세요."
+    }
+  }
+},
+  ZH: {
+  "nav": {
+    "home": "首页",
+    "my_tickets": "我的彩票",
+    "results": "开奖结果",
+    "profile": "个人中心",
+    "back": "返回"
+  },
+  "common": {
+    "buy": "购买彩票",
+    "checkout": "结账",
+    "summary": "订单摘要",
+    "select_lines": "选择注数",
+    "add_line": "添加注数",
+    "close_in": "截止时间",
+    "details": "查看详情",
+    "ok": "确定",
+    "all": "全部"
+  },
+  "home": {
+    "promo": {
+      "title": "特别优惠！",
+      "desc": "今天购买强力球，有机会获得50%折扣",
+      "button": "立即购买"
+    },
+    "jackpot_title": "热门奖池",
+    "see_all": "查看全部"
+  },
+  "payment": {
+    "title": "支付",
+    "total": "总计",
+    "confirm": "确认支付"
+  },
+  "success": {
+    "title": "订单成功！",
+    "desc": "我们已收到您的订单。工作人员将购买彩票并尽快上传扫描件。",
+    "button": "查看我的彩票"
+  },
+  "tickets": {
+    "title": "我的彩票",
+    "tab": {
+      "active": "进行中",
+      "history": "历史记录"
+    },
+    "sort": {
+      "date_desc": "购买日期 (最新)",
+      "date_asc": "购买日期 (最早)",
+      "draw_desc": "开奖日期 (最新)",
+      "draw_asc": "开奖日期 (最早)"
+    },
+    "empty": {
+      "active": "无进行中彩票",
+      "active_desc": "别错过大奖！立即选择您的幸运号码。",
+      "history": "无购买记录",
+      "history_desc": "您的过往彩票和结果将显示在这里。",
+      "filtered": "未找到符合条件的彩票",
+      "button": "购买彩票"
+    },
+    "view_scan": "查看扫描件",
+    "purchase_date": "购买于",
+    "more_lines": "更多注数",
+    "modal": {
+      "scanned": "真实彩票扫描",
+      "result": "彩票结果",
+      "processing": "处理中",
+      "processing_desc": "工作人员正在为您购买彩票。请稍候...",
+      "disclaimer": "*此扫描件是我们授权代理的购买证明。"
+    }
+  },
+  "results": {
+    "title": "最新结果",
+    "check_payout": "查看奖金表",
+    "disclaimer": "*结果参考官方彩票网站",
+    "empty": "暂无结果",
+    "empty_desc": "请稍后查看"
+  },
+  "status": {
+    "pending": "等待购买 (24小时内)",
+    "purchased": "已购买",
+    "scanned": "已扫描",
+    "win": "中奖！",
+    "lose": "未中奖"
+  },
+  "profile": {
+    "wallet": {
+      "balance": "余额",
+      "topup": "充值"
+    },
+    "menu": {
+      "history": "订单记录",
+      "personal": "个人信息",
+      "bank": "收款渠道",
+      "notif": "通知",
+      "contact": "联系客服",
+      "logout": "退出登录"
+    }
+  },
+  "banner": {
+    "guide": {
+      "title": "如何运作",
+      "subtitle": "简单3步",
+      "desc": "选号 > 代买 > 看扫描",
+      "detail": "1. 选择您的游戏和号码。\n2. 安全支付。\n3. 我们在美国的团队购买实体彩票。\n4. 我们扫描并上传到您的账户。\n5. 奖金自动转账！"
+    },
+    "hot": {
+      "title": "大奖提醒",
+      "subtitle": "强力球达到7亿美元",
+      "desc": "成为全球亿万富翁的机会。",
+      "detail": "强力球奖池已滚存至7.19亿美元！不要错过。销售在开奖前2小时截止。"
+    },
+    "promo": {
+      "title": "新会员",
+      "subtitle": "免费获得$5",
+      "desc": "首次充值$20+",
+      "detail": "本月新会员独享。充值至少$20，即可立即获得$5红利信用额用于您的第一张彩票。"
+    }
+  }
+},
+  AR: {
+  "nav": {
+    "home": "الرئيسية",
+    "my_tickets": "تذاكري",
+    "results": "النتائج",
+    "profile": "الملف الشخصي",
+    "back": "رجوع"
+  },
+  "common": {
+    "buy": "شراء تذكرة",
+    "checkout": "الدفع",
+    "summary": "ملخص الطلب",
+    "select_lines": "اختيار الخطوط",
+    "add_line": "إضافة خط",
+    "close_in": "يغلق في",
+    "details": "التفاصيل",
+    "ok": "موافق",
+    "all": "الكل"
+  },
+  "home": {
+    "promo": {
+      "title": "عرض خاص!",
+      "desc": "اشترِ Powerball اليوم، واحصل على فرصة لخصم 50%",
+      "button": "اشترِ الآن"
+    },
+    "jackpot_title": "أعلى الجوائز",
+    "see_all": "عرض الكل"
+  },
+  "payment": {
+    "title": "الدفع",
+    "total": "المجموع",
+    "confirm": "تأكيد الدفع"
+  },
+  "success": {
+    "title": "تم الطلب بنجاح!",
+    "desc": "لقد استلمنا طلبك. سيقوم موظفونا بشراء التذكرة ورفع المسح الضوئي قريباً.",
+    "button": "عرض تذاكري"
+  },
+  "tickets": {
+    "title": "تذاكري",
+    "tab": {
+      "active": "نشطة",
+      "history": "السجل"
+    },
+    "sort": {
+      "date_desc": "تاريخ الشراء (الأحدث)",
+      "date_asc": "تاريخ الشراء (الأقدم)",
+      "draw_desc": "تاريخ السحب (الأحدث)",
+      "draw_asc": "تاريخ السحب (الأقدم)"
+    },
+    "empty": {
+      "active": "لا توجد تذاكر نشطة",
+      "active_desc": "لا تفوت الجائزة الكبرى! اختر أرقام الحظ الآن.",
+      "history": "لا يوجد سجل شراء",
+      "history_desc": "ستظهر تذاكرك السابقة والنتائج هنا.",
+      "filtered": "لم يتم العثور على تذاكر لهذا الفلتر",
+      "button": "شراء تذاكر"
+    },
+    "view_scan": "عرض المسح",
+    "purchase_date": "تم الشراء في",
+    "more_lines": "خطوط إضافية",
+    "modal": {
+      "scanned": "مسح تذكرة حقيقي",
+      "result": "نتيجة التذكرة",
+      "processing": "قيد المعالجة",
+      "processing_desc": "يقوم موظفونا بشراء تذكرتك. يرجى الانتظار...",
+      "disclaimer": "*هذا المسح هو إثبات الشراء من وكيلنا المعتمد."
+    }
+  },
+  "results": {
+    "title": "أحدث النتائج",
+    "check_payout": "عرض جدول الجوائز",
+    "disclaimer": "*النتائج تشير إلى مواقع اليانصيب الرسمية",
+    "empty": "لا توجد نتائج متاحة",
+    "empty_desc": "يرجى التحقق لاحقاً"
+  },
+  "status": {
+    "pending": "في انتظار الشراء (خلال 24 ساعة)",
+    "purchased": "تم الشراء",
+    "scanned": "تم المسح",
+    "win": "لقد ربحت!",
+    "lose": "لم تربح"
+  },
+  "profile": {
+    "wallet": {
+      "balance": "الرصيد",
+      "topup": "شحن"
+    },
+    "menu": {
+      "history": "سجل الطلبات",
+      "personal": "المعلومات الشخصية",
+      "bank": "قنوات الدفع",
+      "notif": "الإشعارات",
+      "contact": "اتصل بالدعم",
+      "logout": "تسجيل الخروج"
+    }
+  },
+  "banner": {
+    "guide": {
+      "title": "كيف يعمل",
+      "subtitle": "3 خطوات بسيطة",
+      "desc": "اختر الأرقام > نحن نشتري > شاهد المسح",
+      "detail": "1. اختر لعبتك وأرقامك.\n2. ادفع بأمان.\n3. فريقنا في الولايات المتحدة يشتري التذكرة الفعلية.\n4. نقوم بمسحها ورفعها إلى حسابك.\n5. يتم تحويل الأرباح تلقائياً!"
+    },
+    "hot": {
+      "title": "تنبيه الجائزة الكبرى",
+      "subtitle": "Powerball يصل إلى 700 مليون دولار",
+      "desc": "فرصتك لتصبح مليارديراً عالمياً.",
+      "detail": "لقد تدحرجت جائزة Powerball الكبرى لتصل إلى 719 مليون دولار! لا تفوت الفرصة. تغلق المبيعات قبل ساعتين من السحب."
+    },
+    "promo": {
+      "title": "أعضاء جدد",
+      "subtitle": "احصل على 5 دولارات مجاناً",
+      "desc": "عند الإيداع الأول بقيمة 20 دولاراً أو أكثر",
+      "detail": "حصري للأعضاء الجدد هذا الشهر. قم بإيداع 20 دولاراً على الأقل واحصل على رصيد إضافي فوري بقيمة 5 دولارات لتذكرتك الأولى."
+    }
+  }
+},
+  HI: {
+  "nav": {
+    "home": "होम",
+    "my_tickets": "मेरे टिकट",
+    "results": "परिणाम",
+    "profile": "प्रोफ़ाइल",
+    "back": "वापस"
+  },
+  "common": {
+    "buy": "टिकट खरीदें",
+    "checkout": "चेकआउट",
+    "summary": "ऑर्डर सारांश",
+    "select_lines": "लाइनें चुनें",
+    "add_line": "लाइन जोड़ें",
+    "close_in": "इसमें बंद होगा",
+    "details": "विवरण देखें",
+    "ok": "ठीक है",
+    "all": "सभी"
+  },
+  "home": {
+    "promo": {
+      "title": "विशेष प्रोमो!",
+      "desc": "आज ही Powerball खरीदें, 50% छूट का मौका पाएं",
+      "button": "अभी खरीदें"
+    },
+    "jackpot_title": "शीर्ष जैकपॉट",
+    "see_all": "सभी देखें"
+  },
+  "payment": {
+    "title": "भुगतान",
+    "total": "कुल",
+    "confirm": "भुगतान की पुष्टि करें"
+  },
+  "success": {
+    "title": "ऑर्डर सफल!",
+    "desc": "हमें आपका ऑर्डर मिल गया है। हमारे कर्मचारी टिकट खरीदेंगे और जल्द ही स्कैन अपलोड करेंगे।",
+    "button": "मेरे टिकट देखें"
+  },
+  "tickets": {
+    "title": "मेरे टिकट",
+    "tab": {
+      "active": "सक्रिय",
+      "history": "इतिहास"
+    },
+    "sort": {
+      "date_desc": "खरीद की तारीख (नवीनतम)",
+      "date_asc": "खरीद की तारीख (सबसे पुराना)",
+      "draw_desc": "ड्रा की तारीख (नवीनतम)",
+      "draw_asc": "ड्रा की तारीख (सबसे पुराना)"
+    },
+    "empty": {
+      "active": "कोई सक्रिय टिकट नहीं",
+      "active_desc": "जैकपॉट न चूकें! अभी अपने भाग्यशाली नंबर चुनें।",
+      "history": "कोई खरीद इतिहास नहीं",
+      "history_desc": "आपके पिछले टिकट और परिणाम यहां दिखाई देंगे।",
+      "filtered": "इस फ़िल्टर के लिए कोई टिकट नहीं मिला",
+      "button": "टिकट खरीदें"
+    },
+    "view_scan": "स्कैन देखें",
+    "purchase_date": "को खरीदा गया",
+    "more_lines": "और लाइनें",
+    "modal": {
+      "scanned": "असली स्कैन किया हुआ टिकट",
+      "result": "टिकट परिणाम",
+      "processing": "प्रसंस्करण",
+      "processing_desc": "हमारे कर्मचारी आपका टिकट खरीद रहे हैं। कृपया प्रतीक्षा करें...",
+      "disclaimer": "*यह स्कैन हमारे अधिकृत एजेंट से खरीद का प्रमाण है।"
+    }
+  },
+  "results": {
+    "title": "नवीनतम परिणाम",
+    "check_payout": "पुरस्कार तालिका देखें",
+    "disclaimer": "*परिणाम आधिकारिक लॉटरी साइटों का संदर्भ देते हैं",
+    "empty": "कोई परिणाम उपलब्ध नहीं",
+    "empty_desc": "कृपया बाद में देखें"
+  },
+  "status": {
+    "pending": "खरीद की प्रतीक्षा (24 घंटे के भीतर)",
+    "purchased": "खरीदा गया",
+    "scanned": "स्कैन किया गया",
+    "win": "आप जीत गए!",
+    "lose": "विजेता नहीं"
+  },
+  "profile": {
+    "wallet": {
+      "balance": "वॉलेट",
+      "topup": "टॉप अप"
+    },
+    "menu": {
+      "history": "ऑर्डर इतिहास",
+      "personal": "व्यक्तिगत जानकारी",
+      "bank": "भुगतान चैनल",
+      "notif": "सूचनाएं",
+      "contact": "सहायता से संपर्क करें",
+      "logout": "लॉग आउट"
+    }
+  },
+  "banner": {
+    "guide": {
+      "title": "यह कैसे काम करता है",
+      "subtitle": "3 सरल चरण",
+      "desc": "नंबर चुनें > हम खरीदते हैं > स्कैन देखें",
+      "detail": "1. अपना खेल और नंबर चुनें।\n2. सुरक्षित रूप से चेकआउट करें।\n3. हमारी यूएस टीम भौतिक टिकट खरीदती है।\n4. हम इसे स्कैन करते हैं और आपके खाते में अपलोड करते हैं।\n5. जीत की राशि स्वचालित रूप से स्थानांतरित की जाती है!"
+    },
+    "hot": {
+      "title": "जैकपॉट अलर्ट",
+      "subtitle": "Powerball $700M तक पहुंचा",
+      "desc": "वैश्विक अरबपति बनने का आपका मौका।",
+      "detail": "Powerball जैकपॉट $719 मिलियन तक पहुंच गया है! चूकें नहीं। ड्रा से 2 घंटे पहले बिक्री बंद हो जाती है।"
+    },
+    "promo": {
+      "title": "नए सदस्य",
+      "subtitle": "$5 मुफ्त पाएं",
+      "desc": "$20+ की पहली जमा राशि पर",
+      "detail": "इस महीने नए सदस्यों के लिए विशेष। कम से कम $20 जमा करें और अपने पहले टिकट के लिए $5 का तत्काल बोनस क्रेडिट प्राप्त करें।"
+    }
+  }
+},
+  ID: {
+  "nav": {
+    "home": "Beranda",
+    "my_tickets": "Tiket Saya",
+    "results": "Hasil",
+    "profile": "Profil",
+    "back": "Kembali"
+  },
+  "common": {
+    "buy": "Beli Tiket",
+    "checkout": "Bayar",
+    "summary": "Ringkasan Pesanan",
+    "select_lines": "Pilih Baris",
+    "add_line": "Tambah Baris",
+    "close_in": "Tutup dalam",
+    "details": "Lihat Detail",
+    "ok": "OK",
+    "all": "Semua"
+  },
+  "home": {
+    "promo": {
+      "title": "Promo Spesial!",
+      "desc": "Beli Powerball hari ini, dapatkan kesempatan diskon 50%",
+      "button": "Beli Sekarang"
+    },
+    "jackpot_title": "Jackpot Teratas",
+    "see_all": "Lihat Semua"
+  },
+  "payment": {
+    "title": "Pembayaran",
+    "total": "Total",
+    "confirm": "Konfirmasi Pembayaran"
+  },
+  "success": {
+    "title": "Pesanan Berhasil!",
+    "desc": "Kami telah menerima pesanan Anda. Staf kami akan membeli tiket dan mengunggah pindaian segera.",
+    "button": "Lihat Tiket Saya"
+  },
+  "tickets": {
+    "title": "Tiket Saya",
+    "tab": {
+      "active": "Aktif",
+      "history": "Riwayat"
+    },
+    "sort": {
+      "date_desc": "Tanggal Beli (Terbaru)",
+      "date_asc": "Tanggal Beli (Terlama)",
+      "draw_desc": "Tanggal Undian (Terbaru)",
+      "draw_asc": "Tanggal Undian (Terlama)"
+    },
+    "empty": {
+      "active": "Tidak ada tiket aktif",
+      "active_desc": "Jangan lewatkan jackpot! Pilih nomor keberuntungan Anda sekarang.",
+      "history": "Tidak ada riwayat pembelian",
+      "history_desc": "Tiket dan hasil masa lalu Anda akan muncul di sini.",
+      "filtered": "Tidak ada tiket ditemukan untuk filter ini",
+      "button": "Beli Tiket"
+    },
+    "view_scan": "Lihat Pindaian",
+    "purchase_date": "Dibeli pada",
+    "more_lines": "baris lainnya",
+    "modal": {
+      "scanned": "Pindaian Tiket Asli",
+      "result": "Hasil Tiket",
+      "processing": "Memproses",
+      "processing_desc": "Staf kami sedang membeli tiket Anda. Mohon tunggu...",
+      "disclaimer": "*Pindaian ini adalah bukti pembelian dari agen resmi kami."
+    }
+  },
+  "results": {
+    "title": "Hasil Terbaru",
+    "check_payout": "Lihat Tabel Hadiah",
+    "disclaimer": "*Hasil mengacu pada situs lotere resmi",
+    "empty": "Tidak ada hasil tersedia",
+    "empty_desc": "Silakan periksa kembali nanti"
+  },
+  "status": {
+    "pending": "Menunggu pembelian (dalam 24 jam)",
+    "purchased": "Dibeli",
+    "scanned": "Dipindai",
+    "win": "Anda Menang!",
+    "lose": "Tidak menang"
+  },
+  "profile": {
+    "wallet": {
+      "balance": "Saldo",
+      "topup": "Isi Ulang"
+    },
+    "menu": {
+      "history": "Riwayat Pesanan",
+      "personal": "Info Pribadi",
+      "bank": "Saluran Pembayaran",
+      "notif": "Notifikasi",
+      "contact": "Hubungi Dukungan",
+      "logout": "Keluar"
+    }
+  },
+  "banner": {
+    "guide": {
+      "title": "Cara Kerja",
+      "subtitle": "3 Langkah Mudah",
+      "desc": "Pilih Angka > Kami Beli > Lihat Pindaian",
+      "detail": "1. Pilih permainan dan angka Anda.\n2. Bayar dengan aman.\n3. Tim AS kami membeli tiket fisik.\n4. Kami memindai dan mengunggahnya ke akun Anda.\n5. Kemenangan ditransfer secara otomatis!"
+    },
+    "hot": {
+      "title": "PERINGATAN JACKPOT",
+      "subtitle": "Powerball mencapai $700M",
+      "desc": "Kesempatan Anda menjadi miliarder global.",
+      "detail": "Jackpot Powerball telah bergulir hingga $719 Juta! Jangan sampai ketinggalan. Penjualan ditutup 2 jam sebelum pengundian."
+    },
+    "promo": {
+      "title": "Anggota Baru",
+      "subtitle": "Dapatkan Gratis $5",
+      "desc": "Pada deposit pertama $20+",
+      "detail": "Eksklusif untuk anggota baru bulan ini. Deposit minimal $20 dan terima kredit bonus instan $5 untuk tiket pertama Anda."
+    }
+  }
+},
+  VI: {
+  "nav": {
+    "home": "Trang chủ",
+    "my_tickets": "Vé của tôi",
+    "results": "Kết quả",
+    "profile": "Hồ sơ",
+    "back": "Quay lại"
+  },
+  "common": {
+    "buy": "Mua Vé",
+    "checkout": "Thanh toán",
+    "summary": "Tóm tắt đơn hàng",
+    "select_lines": "Chọn Dòng",
+    "add_line": "Thêm Dòng",
+    "close_in": "Đóng trong",
+    "details": "Xem Chi tiết",
+    "ok": "OK",
+    "all": "Tất cả"
+  },
+  "home": {
+    "promo": {
+      "title": "Khuyến mãi Đặc biệt!",
+      "desc": "Mua Powerball hôm nay, cơ hội giảm giá 50%",
+      "button": "Mua Ngay"
+    },
+    "jackpot_title": "Giải Jackpot Hàng đầu",
+    "see_all": "Xem Tất cả"
+  },
+  "payment": {
+    "title": "Thanh toán",
+    "total": "Tổng cộng",
+    "confirm": "Xác nhận Thanh toán"
+  },
+  "success": {
+    "title": "Đặt hàng Thành công!",
+    "desc": "Chúng tôi đã nhận được đơn hàng của bạn. Nhân viên sẽ mua vé và tải lên bản scan sớm.",
+    "button": "Xem Vé của tôi"
+  },
+  "tickets": {
+    "title": "Vé của tôi",
+    "tab": {
+      "active": "Đang hoạt động",
+      "history": "Lịch sử"
+    },
+    "sort": {
+      "date_desc": "Ngày mua (Mới nhất)",
+      "date_asc": "Ngày mua (Cũ nhất)",
+      "draw_desc": "Ngày quay (Mới nhất)",
+      "draw_asc": "Ngày quay (Cũ nhất)"
+    },
+    "empty": {
+      "active": "Không có vé đang hoạt động",
+      "active_desc": "Đừng bỏ lỡ giải độc đắc! Chọn số may mắn của bạn ngay.",
+      "history": "Không có lịch sử mua hàng",
+      "history_desc": "Vé và kết quả trước đây của bạn sẽ xuất hiện tại đây.",
+      "filtered": "Không tìm thấy vé cho bộ lọc này",
+      "button": "Mua Vé"
+    },
+    "view_scan": "Xem Bản scan",
+    "purchase_date": "Đã mua vào",
+    "more_lines": "dòng khác",
+    "modal": {
+      "scanned": "Bản scan Vé Thật",
+      "result": "Kết quả Vé",
+      "processing": "Đang xử lý",
+      "processing_desc": "Nhân viên đang mua vé cho bạn. Vui lòng đợi...",
+      "disclaimer": "*Bản scan này là bằng chứng mua hàng từ đại lý ủy quyền của chúng tôi."
+    }
+  },
+  "results": {
+    "title": "Kết quả Mới nhất",
+    "check_payout": "Xem Bảng Giải thưởng",
+    "disclaimer": "*Kết quả tham khảo từ các trang xổ số chính thức",
+    "empty": "Không có kết quả",
+    "empty_desc": "Vui lòng kiểm tra lại sau"
+  },
+  "status": {
+    "pending": "Chờ mua (trong vòng 24h)",
+    "purchased": "Đã mua",
+    "scanned": "Đã scan",
+    "win": "Bạn Đã Thắng!",
+    "lose": "Không trúng"
+  },
+  "profile": {
+    "wallet": {
+      "balance": "Số dư",
+      "topup": "Nạp tiền"
+    },
+    "menu": {
+      "history": "Lịch sử Đơn hàng",
+      "personal": "Thông tin Cá nhân",
+      "bank": "Kênh Thanh toán",
+      "notif": "Thông báo",
+      "contact": "Liên hệ Hỗ trợ",
+      "logout": "Đăng xuất"
+    }
+  },
+  "banner": {
+    "guide": {
+      "title": "Cách thức Hoạt động",
+      "subtitle": "3 Bước Đơn giản",
+      "desc": "Chọn Số > Chúng tôi Mua > Xem Bản scan",
+      "detail": "1. Chọn trò chơi và số của bạn.\n2. Thanh toán an toàn.\n3. Đội ngũ tại Mỹ của chúng tôi mua vé vật lý.\n4. Chúng tôi scan và tải lên tài khoản của bạn.\n5. Tiền thắng được chuyển tự động!"
+    },
+    "hot": {
+      "title": "CẢNH BÁO JACKPOT",
+      "subtitle": "Powerball đạt $700M",
+      "desc": "Cơ hội trở thành tỷ phú toàn cầu của bạn.",
+      "detail": "Giải Jackpot Powerball đã lên tới con số khổng lồ 719 Triệu Đô la! Đừng bỏ lỡ. Bán vé đóng 2 giờ trước giờ quay thưởng."
+    },
+    "promo": {
+      "title": "Thành viên Mới",
+      "subtitle": "Nhận Miễn phí $5",
+      "desc": "Khi nạp lần đầu $20+",
+      "detail": "Dành riêng cho thành viên mới trong tháng này. Nạp ít nhất $20 và nhận ngay $5 tín dụng thưởng cho vé đầu tiên của bạn."
+    }
+  }
+},
+  MS: {
+  "nav": {
+    "home": "Laman Utama",
+    "my_tickets": "Tiket Saya",
+    "results": "Keputusan",
+    "profile": "Profil",
+    "back": "Kembali"
+  },
+  "common": {
+    "buy": "Beli Tiket",
+    "checkout": "Bayar",
+    "summary": "Ringkasan Pesanan",
+    "select_lines": "Pilih Baris",
+    "add_line": "Tambah Baris",
+    "close_in": "Tutup dalam",
+    "details": "Lihat Butiran",
+    "ok": "OK",
+    "all": "Semua"
+  },
+  "home": {
+    "promo": {
+      "title": "Promo Istimewa!",
+      "desc": "Beli Powerball hari ini, dapat peluang diskaun 50%",
+      "button": "Beli Sekarang"
+    },
+    "jackpot_title": "Jackpot Teratas",
+    "see_all": "Lihat Semua"
+  },
+  "payment": {
+    "title": "Pembayaran",
+    "total": "Jumlah",
+    "confirm": "Sahkan Pembayaran"
+  },
+  "success": {
+    "title": "Pesanan Berjaya!",
+    "desc": "Kami telah menerima pesanan anda. Kakitangan kami akan membeli tiket dan memuat naik imbasan tidak lama lagi.",
+    "button": "Lihat Tiket Saya"
+  },
+  "tickets": {
+    "title": "Tiket Saya",
+    "tab": {
+      "active": "Aktif",
+      "history": "Sejarah"
+    },
+    "sort": {
+      "date_desc": "Tarikh Beli (Terkini)",
+      "date_asc": "Tarikh Beli (Terlama)",
+      "draw_desc": "Tarikh Cabutan (Terkini)",
+      "draw_asc": "Tarikh Cabutan (Terlama)"
+    },
+    "empty": {
+      "active": "Tiada tiket aktif",
+      "active_desc": "Jangan lepaskan jackpot! Pilih nombor bertuah anda sekarang.",
+      "history": "Tiada sejarah pembelian",
+      "history_desc": "Tiket dan keputusan lalu anda akan muncul di sini.",
+      "filtered": "Tiada tiket ditemui untuk penapis ini",
+      "button": "Beli Tiket"
+    },
+    "view_scan": "Lihat Imbasan",
+    "purchase_date": "Dibeli pada",
+    "more_lines": "baris lagi",
+    "modal": {
+      "scanned": "Imbasan Tiket Sebenar",
+      "result": "Keputusan Tiket",
+      "processing": "Memproses",
+      "processing_desc": "Kakitangan kami sedang membeli tiket anda. Sila tunggu...",
+      "disclaimer": "*Imbasan ini adalah bukti pembelian daripada ejen sah kami."
+    }
+  },
+  "results": {
+    "title": "Keputusan Terkini",
+    "check_payout": "Lihat Jadual Hadiah",
+    "disclaimer": "*Keputusan merujuk kepada laman loteri rasmi",
+    "tiada": "Tiada keputusan tersedia",
+    "empty_desc": "Sila semak semula kemudian",
+    "empty": "Tiada keputusan tersedia"
+  },
+  "status": {
+    "pending": "Menunggu pembelian (dalam 24j)",
+    "purchased": "Dibeli",
+    "scanned": "Diimbas",
+    "win": "Anda Menang!",
+    "lose": "Tidak menang"
+  },
+  "profile": {
+    "wallet": {
+      "balance": "Baki",
+      "topup": "Tambah Nilai"
+    },
+    "menu": {
+      "history": "Sejarah Pesanan",
+      "personal": "Maklumat Peribadi",
+      "bank": "Saluran Pembayaran",
+      "notif": "Pemberitahuan",
+      "contact": "Hubungi Sokongan",
+      "logout": "Log Keluar"
+    }
+  },
+  "banner": {
+    "guide": {
+      "title": "Cara Ia Berfungsi",
+      "subtitle": "3 Langkah Mudah",
+      "desc": "Pilih Nombor > Kami Beli > Lihat Imbasan",
+      "detail": "1. Pilih permainan dan nombor anda.\n2. Bayar dengan selamat.\n3. Pasukan AS kami membeli tiket fizikal.\n4. Kami mengimbas dan memuat naik ke akaun anda.\n5. Kemenangan dipindahkan secara automatik!"
+    },
+    "hot": {
+      "title": "AMARAN JACKPOT",
+      "subtitle": "Powerball mencecah $700M",
+      "desc": "Peluang anda menjadi bilionair global.",
+      "detail": "Jackpot Powerball telah meningkat kepada $719 Juta yang besar! Jangan ketinggalan. Jualan ditutup 2 jam sebelum cabutan."
+    },
+    "promo": {
+      "title": "Ahli Baru",
+      "subtitle": "Dapatkan Percuma $5",
+      "desc": "Pada deposit pertama $20+",
+      "detail": "Eksklusif untuk ahli baru bulan ini. Deposit sekurang-kurangnya $20 dan terima kredit bonus segera $5 untuk tiket pertama anda."
+    }
+  }
+},
+  TR: {
+  "nav": {
+    "home": "Ana Sayfa",
+    "my_tickets": "Biletlerim",
+    "results": "Sonuçlar",
+    "profile": "Profil",
+    "back": "Geri"
+  },
+  "common": {
+    "buy": "Bilet Al",
+    "checkout": "Ödeme",
+    "summary": "Sipariş Özeti",
+    "select_lines": "Satır Seç",
+    "add_line": "Satır Ekle",
+    "close_in": "Kapanış",
+    "details": "Detayları Gör",
+    "ok": "Tamam",
+    "all": "Tümü"
+  },
+  "home": {
+    "promo": {
+      "title": "Özel Promosyon!",
+      "desc": "Bugün Powerball al, %50 indirim şansı yakala",
+      "button": "Şimdi Al"
+    },
+    "jackpot_title": "En Büyük İkramiyeler",
+    "see_all": "Tümünü Gör"
+  },
+  "payment": {
+    "title": "Ödeme",
+    "total": "Toplam",
+    "confirm": "Ödemeyi Onayla"
+  },
+  "success": {
+    "title": "Sipariş Başarılı!",
+    "desc": "Siparişinizi aldık. Personelimiz bileti satın alacak ve taramayı kısa süre içinde yükleyecektir.",
+    "button": "Biletlerimi Gör"
+  },
+  "tickets": {
+    "title": "Biletlerim",
+    "tab": {
+      "active": "Aktif",
+      "history": "Geçmiş"
+    },
+    "sort": {
+      "date_desc": "Satın Alma Tarihi (En Yeni)",
+      "date_asc": "Satın Alma Tarihi (En Eski)",
+      "draw_desc": "Çekiliş Tarihi (En Yeni)",
+      "draw_asc": "Çekiliş Tarihi (En Eski)"
+    },
+    "empty": {
+      "active": "Aktif bilet yok",
+      "active_desc": "Büyük ikramiyeyi kaçırmayın! Şanslı numaralarınızı şimdi seçin.",
+      "history": "Satın alma geçmişi yok",
+      "history_desc": "Geçmiş biletleriniz ve sonuçlarınız burada görünecek.",
+      "filtered": "Bu filtre için bilet bulunamadı",
+      "button": "Bilet Al"
+    },
+    "view_scan": "Taramayı Gör",
+    "purchase_date": "Satın alındı",
+    "more_lines": "satır daha",
+    "modal": {
+      "scanned": "Gerçek Taranmış Bilet",
+      "result": "Bilet Sonucu",
+      "processing": "İşleniyor",
+      "processing_desc": "Personelimiz biletinizi satın alıyor. Lütfen bekleyin...",
+      "disclaimer": "*Bu tarama yetkili acentemizden satın alma kanıtıdır."
+    }
+  },
+  "results": {
+    "title": "Son Sonuçlar",
+    "check_payout": "Ödül Tablosunu Gör",
+    "disclaimer": "*Sonuçlar resmi piyango sitelerine atıfta bulunur",
+    "empty": "Sonuç yok",
+    "empty_desc": "Lütfen daha sonra tekrar kontrol edin"
+  },
+  "status": {
+    "pending": "Satın alma bekleniyor (24 saat içinde)",
+    "purchased": "Satın Alındı",
+    "scanned": "Tarandı",
+    "win": "Kazandınız!",
+    "lose": "Kazanamadı"
+  },
+  "profile": {
+    "wallet": {
+      "balance": "Bakiye",
+      "topup": "Yükle"
+    },
+    "menu": {
+      "history": "Sipariş Geçmişi",
+      "personal": "Kişisel Bilgiler",
+      "bank": "Ödeme Kanalları",
+      "notif": "Bildirimler",
+      "contact": "Destekle İletişime Geç",
+      "logout": "Çıkış Yap"
+    }
+  },
+  "banner": {
+    "guide": {
+      "title": "Nasıl Çalışır",
+      "subtitle": "3 Basit Adım",
+      "desc": "Numara Seç > Biz Alalım > Taramayı Gör",
+      "detail": "1. Oyununuzu ve numaralarınızı seçin.\n2. Güvenli bir şekilde ödeyin.\n3. ABD ekibimiz fiziksel bileti satın alır.\n4. Tarayıp hesabınıza yükleriz.\n5. Kazançlar otomatik olarak transfer edilir!"
+    },
+    "hot": {
+      "title": "BÜYÜK İKRAMİYE UYARISI",
+      "subtitle": "Powerball $700M'a ulaştı",
+      "desc": "Küresel milyarder olma şansınız.",
+      "detail": "Powerball büyük ikramiyesi devasa 719 Milyon Dolara ulaştı! Kaçırmayın. Satışlar çekilişten 2 saat önce kapanır."
+    },
+    "promo": {
+      "title": "Yeni Üyeler",
+      "subtitle": "5$ Ücretsiz Alın",
+      "desc": "20$+ ilk para yatırmada",
+      "detail": "Bu ay yeni üyelere özel. En az 20$ yatırın ve ilk biletiniz için anında 5$ bonus kredi kazanın."
+    }
+  }
+},
+};
