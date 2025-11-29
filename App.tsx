@@ -12,8 +12,20 @@ import { ProfileView } from './components/ProfileView';
 import { LoginView } from './components/LoginView';
 import { RegisterView } from './components/RegisterView';
 import { AdminBannerManager } from './components/AdminBannerManager';
+import { AdminPanel } from './components/AdminPanel';
+import { HowToPlayView } from './components/HowToPlayView';
+import { Footer } from './components/Footer';
 import { useLanguage } from './contexts/LanguageContext';
 import lotteryService from './services/lotteryApiService';
+import { PaymentProcessor } from './components/PaymentProcessor';
+import { PromptPayQR } from './components/PromptPayQR';
+import { BankTransfer } from './components/BankTransfer';
+import { TrueMoneyPayment } from './components/TrueMoneyPayment';
+import { WisePayment } from './components/WisePayment';
+import { AlipayPayment } from './components/AlipayPayment';
+import { WeChatPayment } from './components/WeChatPayment';
+import { OmisePayment } from './components/OmisePayment';
+import stripePaymentService, { PaymentResult } from './services/stripePaymentService';
 
 // Mock Data (will be replaced with real API data)
 const MOCK_GAMES: LotteryGame[] = [
@@ -91,8 +103,10 @@ const MOCK_PURCHASED_TICKETS: PurchasedTicket[] = [
 ];
 
 const App: React.FC = () => {
-  const [currentView, setCurrentView] = useState<AppView>(AppView.LOGIN);
+  const [currentView, setCurrentView] = useState<AppView>(AppView.HOME);
   const [selectedGame, setSelectedGame] = useState<LotteryGame | null>(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
   const [lines, setLines] = useState<LotteryLine[]>(INITIAL_LINES);
   const [activeLineId, setActiveLineId] = useState<string | null>(null);
   const [isSelectorOpen, setIsSelectorOpen] = useState(false);
@@ -110,7 +124,9 @@ const App: React.FC = () => {
   // Global State for Purchased Tickets
   const [purchasedTickets, setPurchasedTickets] = useState<PurchasedTicket[]>(MOCK_PURCHASED_TICKETS);
   const [processingPayment, setProcessingPayment] = useState(false);
-  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<'CARD' | 'OMISE' | 'WISE' | 'ALIPAY'>('CARD');
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<'CARD' | 'PROMPTPAY' | 'TRUEMONEY' | 'BANK' | 'WISE' | 'ALIPAY' | 'WECHAT' | 'OMISE'>('CARD');
+  const [showPaymentProcessor, setShowPaymentProcessor] = useState(false);
+  const [currentOrderId, setCurrentOrderId] = useState<string>('');
   
   // Payment Card Management
   const [hasLinkedCard, setHasLinkedCard] = useState(false);
@@ -162,36 +178,54 @@ const App: React.FC = () => {
     }
   ]);
 
+  // Fetch jackpot data on mount
   useEffect(() => {
     const fetchLotteryData = async () => {
       try {
         const jackpots = await lotteryService.getAllJackpots();
         
-        const updatedGames = games.map(game => {
+        setGames(prevGames => prevGames.map(game => {
           const jackpotData = jackpots.find(j => j.game === game.id);
           if (jackpotData && game.id !== 'eurojackpot') {
-            const countdown = lotteryService.getCountdown(game.id as 'powerball' | 'megamillions');
             return {
               ...game,
               jackpot: `US$ ${jackpotData.amount.toLocaleString()} Million`,
-              nextDraw: countdown
             };
           }
           return game;
-        });
-        
-        setGames(updatedGames);
+        }));
       } catch (error) {
         console.error('Failed to fetch lottery data:', error);
-        // Keep current games data on error
       }
     };
 
-    // Fetch immediately but don't block UI
-    setTimeout(fetchLotteryData, 1000);
+    // Fetch immediately
+    fetchLotteryData();
     
-    // Refresh every 5 minutes
+    // Refresh jackpots every 5 minutes
     const interval = setInterval(fetchLotteryData, 5 * 60 * 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Update countdown every second
+  useEffect(() => {
+    const updateCountdown = () => {
+      setGames(prevGames => prevGames.map(game => {
+        if (game.id === 'powerball' || game.id === 'megamillions') {
+          return {
+            ...game,
+            nextDraw: lotteryService.getCountdown(game.id)
+          };
+        }
+        return game;
+      }));
+    };
+
+    // Update immediately
+    updateCountdown();
+
+    // Update every second
+    const interval = setInterval(updateCountdown, 1000);
     return () => clearInterval(interval);
   }, []);
 
@@ -360,6 +394,7 @@ const App: React.FC = () => {
              <button onClick={() => setCurrentView(AppView.HOME)} className={`hover:text-red-600 transition ${currentView === AppView.HOME ? 'text-red-600' : ''}`}>{t('nav.home')}</button>
              <button onClick={() => setCurrentView(AppView.MY_TICKETS)} className={`hover:text-red-600 transition ${currentView === AppView.MY_TICKETS ? 'text-red-600' : ''}`}>{t('nav.my_tickets')}</button>
              <button onClick={() => setCurrentView(AppView.RESULTS)} className={`hover:text-red-600 transition ${currentView === AppView.RESULTS ? 'text-red-600' : ''}`}>{t('nav.results')}</button>
+             <button onClick={() => setCurrentView(AppView.HOW_TO_PLAY)} className={`hover:text-red-600 transition ${currentView === AppView.HOW_TO_PLAY ? 'text-red-600' : ''}`}>How to Play</button>
              <button onClick={() => setCurrentView(AppView.PROFILE)} className={`hover:text-red-600 transition ${currentView === AppView.PROFILE ? 'text-red-600' : ''}`}>{t('nav.profile')}</button>
           </div>
 
@@ -372,13 +407,24 @@ const App: React.FC = () => {
                 {language === 'TH' ? '🇹🇭 TH' : '🇺🇸 EN'}
              </button>
 
-             <div className="hidden md:block text-sm mr-2 pl-2 border-l border-gray-200">
-                <span className="text-gray-400">Hi,</span> <span className="font-bold text-gray-800">Win</span>
-             </div>
-             <div className="relative hover:text-red-600 cursor-pointer transition p-1">
-                <IconCart className="w-6 h-6" />
-                <span className="absolute top-0 right-0 bg-red-500 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center shadow-sm border-2 border-white">0</span>
-             </div>
+             {isLoggedIn ? (
+               <>
+                 <div className="hidden md:block text-sm mr-2 pl-2 border-l border-gray-200">
+                    <span className="text-gray-400">Hi,</span> <span className="font-bold text-gray-800">Win</span>
+                 </div>
+                 <div className="relative hover:text-red-600 cursor-pointer transition p-1">
+                    <IconCart className="w-6 h-6" />
+                    <span className="absolute top-0 right-0 bg-red-500 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center shadow-sm border-2 border-white">0</span>
+                 </div>
+               </>
+             ) : (
+               <button 
+                  onClick={() => setCurrentView(AppView.LOGIN)}
+                  className="bg-red-600 hover:bg-red-700 text-white px-4 py-1.5 rounded-lg text-sm font-bold transition-colors shadow-sm"
+               >
+                  เข้าสู่ระบบ
+               </button>
+             )}
           </div>
       </div>
     </header>
@@ -389,10 +435,10 @@ const App: React.FC = () => {
   const renderContent = () => {
       switch(currentView) {
         case AppView.LOGIN:
-            return <LoginView onLoginSuccess={() => setCurrentView(AppView.HOME)} onGoToRegister={() => setCurrentView(AppView.REGISTER)} />;
+            return <LoginView onLoginSuccess={() => { setIsLoggedIn(true); setCurrentView(AppView.HOME); }} onGoToRegister={() => setCurrentView(AppView.REGISTER)} />;
         
         case AppView.REGISTER:
-            return <RegisterView onRegisterSuccess={() => setCurrentView(AppView.HOME)} onGoToLogin={() => setCurrentView(AppView.LOGIN)} />;
+            return <RegisterView onRegisterSuccess={() => { setIsLoggedIn(true); setCurrentView(AppView.HOME); }} onGoToLogin={() => setCurrentView(AppView.LOGIN)} />;
 
         case AppView.HOME:
             return (
@@ -400,6 +446,7 @@ const App: React.FC = () => {
                 <div className="mb-6 md:mb-12">
                     <BannerSlider />
                 </div>
+
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                     <div className="md:col-span-3 bg-blue-600 rounded-2xl p-6 text-white flex flex-col md:flex-row justify-between items-start md:items-center shadow-lg shadow-blue-100 relative overflow-hidden gap-4">
                         <div className="absolute right-0 top-0 opacity-10 transform translate-x-10 -translate-y-10">
@@ -597,56 +644,6 @@ const App: React.FC = () => {
                                 </div>
                             </div>
 
-                            {/* Power Play / Megaplier Option */}
-                            <div className="bg-gradient-to-r from-yellow-50 to-amber-50 border-2 border-yellow-200 rounded-xl p-4 mb-6">
-                                <div className="flex items-start justify-between gap-4">
-                                    <div className="flex items-start gap-3 flex-1">
-                                        <div className="bg-gradient-to-br from-yellow-400 to-amber-500 p-2.5 rounded-xl shadow-md text-white shrink-0">
-                                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                                            </svg>
-                                        </div>
-                                        <div className="flex-1">
-                                            <div className="flex items-center gap-2 mb-1">
-                                                <h4 className="text-sm md:text-base font-bold text-gray-800">
-                                                    {selectedGame?.id === 'powerball' ? 'Power Play' : selectedGame?.id === 'megamillions' ? 'Megaplier' : 'Multiplier'}
-                                                </h4>
-                                                <span className="text-xs bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full font-bold">+$1/line</span>
-                                            </div>
-                                            <p className="text-xs md:text-sm text-gray-700 leading-relaxed">
-                                                Multiply non-jackpot prizes by <span className="font-bold text-amber-600">2x, 3x, 4x, 5x, or 10x</span>! 
-                                                Increase your winnings on all prize tiers.
-                                            </p>
-                                            <div className="mt-2 flex items-center gap-2 text-xs text-gray-600">
-                                                <span className="bg-white px-2 py-1 rounded border border-yellow-200 font-medium">2x</span>
-                                                <span className="bg-white px-2 py-1 rounded border border-yellow-200 font-medium">3x</span>
-                                                <span className="bg-white px-2 py-1 rounded border border-yellow-200 font-medium">4x</span>
-                                                <span className="bg-white px-2 py-1 rounded border border-yellow-200 font-medium">5x</span>
-                                                <span className="bg-gradient-to-r from-yellow-400 to-amber-500 text-white px-2 py-1 rounded font-bold shadow-sm">10x</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <label className="flex items-center cursor-pointer shrink-0">
-                                        <div className="relative">
-                                            <input 
-                                                type="checkbox" 
-                                                checked={hasMultiplier}
-                                                onChange={(e) => setHasMultiplier(e.target.checked)}
-                                                className="sr-only peer"
-                                            />
-                                            <div className="w-14 h-8 bg-gray-200 rounded-full peer peer-checked:bg-gradient-to-r peer-checked:from-yellow-400 peer-checked:to-amber-500 transition-all shadow-inner"></div>
-                                            <div className="absolute left-1 top-1 w-6 h-6 bg-white rounded-full shadow-md transition-all peer-checked:translate-x-6 flex items-center justify-center">
-                                                {hasMultiplier && (
-                                                    <svg className="w-3 h-3 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
-                                                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                                    </svg>
-                                                )}
-                                            </div>
-                                        </div>
-                                    </label>
-                                </div>
-                            </div>
-
                             <div className="bg-red-50 border border-red-100 rounded-xl p-3 md:p-4 flex items-center gap-3 md:gap-4 mb-6">
                                 <div className="bg-white p-2 rounded-full shadow-sm text-red-500 shrink-0">
                                     <IconTicket className="w-5 h-5 md:w-6 md:h-6" />
@@ -735,6 +732,139 @@ const App: React.FC = () => {
             );
 
         case AppView.PAYMENT:
+            const orderId = currentOrderId || `TR-${Date.now().toString().slice(-8)}`;
+            const priceAmount = parseFloat(getPrice());
+            
+            // If payment processor is open, show the selected payment component
+            if (showPaymentProcessor) {
+              const handlePaymentComplete = (transactionId: string) => {
+                const newTicket: PurchasedTicket = {
+                  id: orderId,
+                  gameId: selectedGame?.id || '',
+                  gameName: selectedGame?.name || '',
+                  drawDate: new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }),
+                  status: 'PENDING',
+                  totalAmount: `US$ ${getPrice()}`,
+                  purchaseDate: new Date().toISOString().split('T')[0],
+                  lines: lines.filter(l => l.mainNumbers.length > 0)
+                };
+                setPurchasedTickets([newTicket, ...purchasedTickets]);
+                setShowPaymentProcessor(false);
+                setCurrentView(AppView.SUCCESS);
+              };
+              
+              const handlePaymentCancel = () => {
+                setShowPaymentProcessor(false);
+              };
+              
+              return (
+                <div className="max-w-md mx-auto">
+                  <button
+                    onClick={handlePaymentCancel}
+                    className="flex items-center gap-2 text-gray-600 hover:text-gray-800 mb-4"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                    กลับ
+                  </button>
+                  
+                  {selectedPaymentMethod === 'CARD' && (
+                    <PaymentProcessor
+                      amount={priceAmount}
+                      orderId={orderId}
+                      gameId={selectedGame?.id || ''}
+                      gameName={selectedGame?.name || ''}
+                      onSuccess={(result) => {
+                        if (result.transactionId) {
+                          handlePaymentComplete(result.transactionId);
+                        }
+                      }}
+                      onError={(error) => alert(error)}
+                      onCancel={handlePaymentCancel}
+                    />
+                  )}
+                  
+                  {selectedPaymentMethod === 'PROMPTPAY' && (
+                    <PromptPayQR
+                      amount={priceAmount}
+                      orderId={orderId}
+                      gameId={selectedGame?.id || ''}
+                      gameName={selectedGame?.name || ''}
+                      onSuccess={handlePaymentComplete}
+                      onCancel={handlePaymentCancel}
+                    />
+                  )}
+                  
+                  {selectedPaymentMethod === 'TRUEMONEY' && (
+                    <TrueMoneyPayment
+                      amount={priceAmount}
+                      orderId={orderId}
+                      gameId={selectedGame?.id || ''}
+                      gameName={selectedGame?.name || ''}
+                      onSuccess={handlePaymentComplete}
+                      onCancel={handlePaymentCancel}
+                    />
+                  )}
+                  
+                  {selectedPaymentMethod === 'BANK' && (
+                    <BankTransfer
+                      amount={priceAmount}
+                      orderId={orderId}
+                      gameId={selectedGame?.id || ''}
+                      gameName={selectedGame?.name || ''}
+                      onSuccess={handlePaymentComplete}
+                      onCancel={handlePaymentCancel}
+                    />
+                  )}
+                  
+                  {selectedPaymentMethod === 'WISE' && (
+                    <WisePayment
+                      amount={priceAmount}
+                      orderId={orderId}
+                      gameId={selectedGame?.id || ''}
+                      gameName={selectedGame?.name || ''}
+                      onSuccess={handlePaymentComplete}
+                      onCancel={handlePaymentCancel}
+                    />
+                  )}
+                  
+                  {selectedPaymentMethod === 'ALIPAY' && (
+                    <AlipayPayment
+                      amount={priceAmount}
+                      orderId={orderId}
+                      gameId={selectedGame?.id || ''}
+                      gameName={selectedGame?.name || ''}
+                      onSuccess={handlePaymentComplete}
+                      onCancel={handlePaymentCancel}
+                    />
+                  )}
+                  
+                  {selectedPaymentMethod === 'WECHAT' && (
+                    <WeChatPayment
+                      amount={priceAmount}
+                      orderId={orderId}
+                      gameId={selectedGame?.id || ''}
+                      gameName={selectedGame?.name || ''}
+                      onSuccess={handlePaymentComplete}
+                      onCancel={handlePaymentCancel}
+                    />
+                  )}
+                  
+                  {selectedPaymentMethod === 'OMISE' && (
+                    <OmisePayment
+                      amount={priceAmount}
+                      orderId={orderId}
+                      gameId={selectedGame?.id || ''}
+                      gameName={selectedGame?.name || ''}
+                      onSuccess={handlePaymentComplete}
+                      onCancel={handlePaymentCancel}
+                    />
+                  )}
+                </div>
+              );
+            }
+            
             return (
                 <div className="max-w-xl mx-auto space-y-6">
                      <h2 className="text-2xl font-bold text-gray-800 mb-4">{t('payment.title')}</h2>
@@ -767,9 +897,57 @@ const App: React.FC = () => {
                                  </div>
                              </label>
 
-                             {/* Omise (Thailand) */}
+                             {/* PromptPay (Thailand) */}
                              <label className={`flex items-center gap-4 p-4 border-2 rounded-xl cursor-pointer transition-all ${
-                                 selectedPaymentMethod === 'OMISE' 
+                                 selectedPaymentMethod === 'PROMPTPAY' 
+                                 ? 'border-blue-500 bg-blue-50' 
+                                 : 'border-gray-200 hover:border-gray-300'
+                             }`}>
+                                 <input 
+                                     type="radio" 
+                                     name="payment" 
+                                     className="w-5 h-5 text-blue-600" 
+                                     checked={selectedPaymentMethod === 'PROMPTPAY'}
+                                     onChange={() => setSelectedPaymentMethod('PROMPTPAY')}
+                                 />
+                                 <div className="flex-1 flex items-center gap-3">
+                                     <div className="p-2 bg-white rounded-lg shadow-sm">
+                                         <IconQrCode className="w-6 h-6 text-blue-600" />
+                                     </div>
+                                     <div>
+                                         <span className="font-bold text-gray-800 block">PromptPay QR</span>
+                                         <span className="text-xs text-gray-500">สแกน QR ผ่านแอปธนาคาร</span>
+                                     </div>
+                                 </div>
+                             </label>
+
+                             {/* TrueMoney Wallet */}
+                             <label className={`flex items-center gap-4 p-4 border-2 rounded-xl cursor-pointer transition-all ${
+                                 selectedPaymentMethod === 'TRUEMONEY' 
+                                 ? 'border-orange-500 bg-orange-50' 
+                                 : 'border-gray-200 hover:border-gray-300'
+                             }`}>
+                                 <input 
+                                     type="radio" 
+                                     name="payment" 
+                                     className="w-5 h-5 text-orange-600" 
+                                     checked={selectedPaymentMethod === 'TRUEMONEY'}
+                                     onChange={() => setSelectedPaymentMethod('TRUEMONEY')}
+                                 />
+                                 <div className="flex-1 flex items-center gap-3">
+                                     <div className="p-2 bg-white rounded-lg shadow-sm">
+                                         <span className="text-xl">💰</span>
+                                     </div>
+                                     <div>
+                                         <span className="font-bold text-gray-800 block">TrueMoney Wallet</span>
+                                         <span className="text-xs text-gray-500">ชำระผ่าน TrueMoney</span>
+                                     </div>
+                                 </div>
+                             </label>
+
+                             {/* Bank Transfer */}
+                             <label className={`flex items-center gap-4 p-4 border-2 rounded-xl cursor-pointer transition-all ${
+                                 selectedPaymentMethod === 'BANK' 
                                  ? 'border-green-500 bg-green-50' 
                                  : 'border-gray-200 hover:border-gray-300'
                              }`}>
@@ -777,36 +955,36 @@ const App: React.FC = () => {
                                      type="radio" 
                                      name="payment" 
                                      className="w-5 h-5 text-green-600" 
-                                     checked={selectedPaymentMethod === 'OMISE'}
-                                     onChange={() => setSelectedPaymentMethod('OMISE')}
+                                     checked={selectedPaymentMethod === 'BANK'}
+                                     onChange={() => setSelectedPaymentMethod('BANK')}
                                  />
                                  <div className="flex-1 flex items-center gap-3">
                                      <div className="p-2 bg-white rounded-lg shadow-sm">
-                                         <IconOmise className="w-6 h-6 text-green-600" />
+                                         <IconBank className="w-6 h-6 text-green-600" />
                                      </div>
                                      <div>
-                                         <span className="font-bold text-gray-800 block">Omise Payment</span>
-                                         <span className="text-xs text-gray-500">PromptPay, TrueMoney, Rabbit LINE Pay</span>
+                                         <span className="font-bold text-gray-800 block">โอนเงินผ่านธนาคาร</span>
+                                         <span className="text-xs text-gray-500">โอนเงินแล้วอัพโหลดสลิป</span>
                                      </div>
                                  </div>
                              </label>
 
-                             {/* Wise */}
+                             {/* Wise Transfer */}
                              <label className={`flex items-center gap-4 p-4 border-2 rounded-xl cursor-pointer transition-all ${
                                  selectedPaymentMethod === 'WISE' 
-                                 ? 'border-purple-500 bg-purple-50' 
+                                 ? 'border-teal-500 bg-teal-50' 
                                  : 'border-gray-200 hover:border-gray-300'
                              }`}>
                                  <input 
                                      type="radio" 
                                      name="payment" 
-                                     className="w-5 h-5 text-purple-600" 
+                                     className="w-5 h-5 text-teal-600" 
                                      checked={selectedPaymentMethod === 'WISE'}
                                      onChange={() => setSelectedPaymentMethod('WISE')}
                                  />
                                  <div className="flex-1 flex items-center gap-3">
                                      <div className="p-2 bg-white rounded-lg shadow-sm">
-                                         <IconWise className="w-6 h-6 text-purple-600" />
+                                         <IconWise className="w-6 h-6 text-teal-600" />
                                      </div>
                                      <div>
                                          <span className="font-bold text-gray-800 block">Wise Transfer</span>
@@ -824,7 +1002,7 @@ const App: React.FC = () => {
                                  <input 
                                      type="radio" 
                                      name="payment" 
-                                     className="w-5 h-5 text-blue-600" 
+                                     className="w-5 h-5 text-blue-500" 
                                      checked={selectedPaymentMethod === 'ALIPAY'}
                                      onChange={() => setSelectedPaymentMethod('ALIPAY')}
                                  />
@@ -833,43 +1011,62 @@ const App: React.FC = () => {
                                          <IconAlipay className="w-6 h-6 text-blue-500" />
                                      </div>
                                      <div>
-                                         <span className="font-bold text-gray-800 block">Alipay</span>
-                                         <span className="text-xs text-gray-500">支付宝 - Chinese wallet</span>
+                                         <span className="font-bold text-gray-800 block">Alipay 支付宝</span>
+                                         <span className="text-xs text-gray-500">Chinese wallet payment</span>
+                                     </div>
+                                 </div>
+                             </label>
+
+                             {/* WeChat Pay */}
+                             <label className={`flex items-center gap-4 p-4 border-2 rounded-xl cursor-pointer transition-all ${
+                                 selectedPaymentMethod === 'WECHAT' 
+                                 ? 'border-green-500 bg-green-50' 
+                                 : 'border-gray-200 hover:border-gray-300'
+                             }`}>
+                                 <input 
+                                     type="radio" 
+                                     name="payment" 
+                                     className="w-5 h-5 text-green-500" 
+                                     checked={selectedPaymentMethod === 'WECHAT'}
+                                     onChange={() => setSelectedPaymentMethod('WECHAT')}
+                                 />
+                                 <div className="flex-1 flex items-center gap-3">
+                                     <div className="p-2 bg-white rounded-lg shadow-sm">
+                                         <svg className="w-6 h-6 text-green-500" viewBox="0 0 24 24" fill="currentColor">
+                                             <path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 0 1 .213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 0 0 .167-.054l1.903-1.114a.864.864 0 0 1 .717-.098 10.16 10.16 0 0 0 2.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-4.972 1.932-6.446 1.703-1.415 3.882-1.98 5.853-1.838-.576-3.583-4.196-6.348-8.596-6.348z"/>
+                                         </svg>
+                                     </div>
+                                     <div>
+                                         <span className="font-bold text-gray-800 block">WeChat Pay 微信支付</span>
+                                         <span className="text-xs text-gray-500">Chinese mobile payment</span>
+                                     </div>
+                                 </div>
+                             </label>
+
+                             {/* Omise */}
+                             <label className={`flex items-center gap-4 p-4 border-2 rounded-xl cursor-pointer transition-all ${
+                                 selectedPaymentMethod === 'OMISE' 
+                                 ? 'border-indigo-500 bg-indigo-50' 
+                                 : 'border-gray-200 hover:border-gray-300'
+                             }`}>
+                                 <input 
+                                     type="radio" 
+                                     name="payment" 
+                                     className="w-5 h-5 text-indigo-600" 
+                                     checked={selectedPaymentMethod === 'OMISE'}
+                                     onChange={() => setSelectedPaymentMethod('OMISE')}
+                                 />
+                                 <div className="flex-1 flex items-center gap-3">
+                                     <div className="p-2 bg-white rounded-lg shadow-sm">
+                                         <IconOmise className="w-6 h-6 text-indigo-600" />
+                                     </div>
+                                     <div>
+                                         <span className="font-bold text-gray-800 block">Omise</span>
+                                         <span className="text-xs text-gray-500">PromptPay, TrueMoney, LINE Pay</span>
                                      </div>
                                  </div>
                              </label>
                          </div>
-
-                         {/* Linked Cards Display */}
-                         {selectedPaymentMethod === 'CARD' && linkedCards.length > 0 && (
-                             <div className="mt-4 bg-gray-50 border border-gray-100 rounded-xl p-4">
-                                 <div className="flex justify-between items-center mb-3">
-                                     <span className="text-sm font-medium text-gray-700">Saved Cards</span>
-                                     <button 
-                                         onClick={() => setShowLinkCardModal(true)}
-                                         className="text-xs text-blue-600 hover:text-blue-700 font-medium"
-                                     >
-                                         + Add New
-                                     </button>
-                                 </div>
-                                 <div className="space-y-2">
-                                     {linkedCards.map((card) => (
-                                         <div key={card.id} className="flex items-center gap-3 p-3 bg-white rounded-lg border border-gray-200">
-                                             <div className="w-10 h-7 bg-gradient-to-br from-blue-600 to-blue-400 rounded flex items-center justify-center text-white text-xs font-bold">
-                                                 {card.type === 'VISA' ? 'VISA' : card.type === 'MASTERCARD' ? 'MC' : 'AMEX'}
-                                             </div>
-                                             <div className="flex-1">
-                                                 <p className="text-sm font-medium text-gray-800">•••• •••• •••• {card.last4}</p>
-                                                 <p className="text-xs text-gray-500">Expires {card.expiry}</p>
-                                             </div>
-                                             {card.isDefault && (
-                                                 <span className="text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded font-medium">Default</span>
-                                             )}
-                                         </div>
-                                     ))}
-                                 </div>
-                             </div>
-                         )}
 
                          {/* Payment Info Box */}
                          <div className="mt-4 bg-gray-50 border border-gray-100 rounded-xl p-4">
@@ -879,22 +1076,46 @@ const App: React.FC = () => {
                                      <p>3D Secure authentication • SSL encrypted</p>
                                  </div>
                              )}
-                             {selectedPaymentMethod === 'OMISE' && (
+                             {selectedPaymentMethod === 'PROMPTPAY' && (
                                  <div className="text-xs text-gray-600 space-y-1">
-                                     <p className="font-medium text-gray-700">🇹🇭 Thailand Payment Gateway</p>
-                                     <p>Instant QR payment • TrueMoney • Rabbit LINE Pay</p>
+                                     <p className="font-medium text-gray-700">📱 PromptPay QR Payment</p>
+                                     <p>สแกน QR Code ผ่านแอปธนาคาร • ยืนยันอัตโนมัติ</p>
+                                 </div>
+                             )}
+                             {selectedPaymentMethod === 'TRUEMONEY' && (
+                                 <div className="text-xs text-gray-600 space-y-1">
+                                     <p className="font-medium text-gray-700">💰 TrueMoney Wallet</p>
+                                     <p>ชำระผ่าน TrueMoney Wallet • ยืนยันด้วย OTP</p>
+                                 </div>
+                             )}
+                             {selectedPaymentMethod === 'BANK' && (
+                                 <div className="text-xs text-gray-600 space-y-1">
+                                     <p className="font-medium text-gray-700">🏦 Bank Transfer</p>
+                                     <p>โอนเงินผ่านธนาคาร • อัพโหลดสลิปยืนยัน</p>
                                  </div>
                              )}
                              {selectedPaymentMethod === 'WISE' && (
                                  <div className="text-xs text-gray-600 space-y-1">
-                                     <p className="font-medium text-gray-700">🌍 International Transfer</p>
-                                     <p>Low fees • Real exchange rate • 1-2 business days</p>
+                                     <p className="font-medium text-gray-700">🌍 Wise International Transfer</p>
+                                     <p>Low fees • Real exchange rate • FCA regulated</p>
                                  </div>
                              )}
                              {selectedPaymentMethod === 'ALIPAY' && (
                                  <div className="text-xs text-gray-600 space-y-1">
-                                     <p className="font-medium text-gray-700">🇨🇳 Alipay Wallet</p>
-                                     <p>支付宝支付 • Instant confirmation • CNY supported</p>
+                                     <p className="font-medium text-gray-700">🇨🇳 支付宝 Alipay</p>
+                                     <p>扫码支付 • 蚂蚁金服安全保障</p>
+                                 </div>
+                             )}
+                             {selectedPaymentMethod === 'WECHAT' && (
+                                 <div className="text-xs text-gray-600 space-y-1">
+                                     <p className="font-medium text-gray-700">💬 微信支付 WeChat Pay</p>
+                                     <p>扫码支付 • 财付通安全保障</p>
+                                 </div>
+                             )}
+                             {selectedPaymentMethod === 'OMISE' && (
+                                 <div className="text-xs text-gray-600 space-y-1">
+                                     <p className="font-medium text-gray-700">🇹🇭 Omise Thailand Gateway</p>
+                                     <p>PromptPay • TrueMoney • LINE Pay • บัตรเครดิต</p>
                                  </div>
                              )}
                          </div>
@@ -909,11 +1130,8 @@ const App: React.FC = () => {
                          </button>
                          <button 
                             onClick={() => {
-                              if (selectedPaymentMethod === 'CARD' && linkedCards.length === 0) {
-                                setShowLinkCardModal(true);
-                              } else {
-                                setShowPaymentDetailsModal(true);
-                              }
+                              setCurrentOrderId(`TR-${Date.now().toString().slice(-8)}`);
+                              setShowPaymentProcessor(true);
                             }}
                             disabled={processingPayment}
                             className="flex-1 bg-red-600 text-white py-4 rounded-xl font-bold text-lg shadow-red-200 shadow-lg hover:bg-red-700 transition-all flex justify-center items-center disabled:opacity-70"
@@ -979,12 +1197,20 @@ const App: React.FC = () => {
         case AppView.PROFILE:
             return <ProfileView 
               onGoToHistory={() => { setCurrentView(AppView.MY_TICKETS); }} 
-              onLogout={() => setCurrentView(AppView.LOGIN)}
-              onManageBanners={() => setCurrentView(AppView.ADMIN_BANNERS)}
+              onGoToResults={() => { setCurrentView(AppView.RESULTS); }}
+              onGoToHowToPlay={() => { setCurrentView(AppView.HOW_TO_PLAY); }}
+              onLogout={() => { setIsLoggedIn(false); setCurrentView(AppView.HOME); }}
+              onManageBanners={() => setCurrentView(AppView.ADMIN_PANEL)}
             />;
+
+        case AppView.HOW_TO_PLAY:
+            return <HowToPlayView />;
 
         case AppView.ADMIN_BANNERS:
             return <AdminBannerManager />;
+
+        case AppView.ADMIN_PANEL:
+            return <AdminPanel />;
       }
   };
 
@@ -997,6 +1223,11 @@ const App: React.FC = () => {
         <main className={`${isAuthView ? 'w-full' : 'flex-1 max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-6 pb-24 md:pb-10 md:py-10'} ${currentView === AppView.GAME_DETAILS ? 'pb-48' : ''}`}>
              {renderContent()}
         </main>
+
+        {/* Footer - Show on all pages except auth, game details, payment, success */}
+        {!isAuthView && currentView !== AppView.GAME_DETAILS && currentView !== AppView.PAYMENT && currentView !== AppView.SUCCESS && (
+            <Footer />
+        )}
         
         {/* Mobile Fixed Bottom Bar (Specific to Checkout) */}
         {currentView === AppView.GAME_DETAILS && (
@@ -1432,6 +1663,50 @@ const App: React.FC = () => {
                     </button>
                 </div>
              </div>
+        )}
+
+        {/* Login Required Modal for Payment */}
+        {showLoginModal && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm" onClick={() => setShowLoginModal(false)}>
+                <div className="bg-white w-full max-w-sm mx-4 rounded-2xl p-6 shadow-2xl animate-fade-in-up" onClick={e => e.stopPropagation()}>
+                    <div className="text-center mb-6">
+                        <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg className="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                        </div>
+                        <h3 className="font-bold text-xl text-gray-800 mb-2">กรุณาเข้าสู่ระบบ</h3>
+                        <p className="text-gray-500 text-sm">คุณต้องเข้าสู่ระบบก่อนทำการชำระเงิน</p>
+                    </div>
+                    
+                    <div className="space-y-3">
+                        <button 
+                            onClick={() => {
+                                setShowLoginModal(false);
+                                setCurrentView(AppView.LOGIN);
+                            }}
+                            className="w-full bg-red-600 text-white py-3.5 rounded-xl font-bold text-lg shadow-lg shadow-red-200 hover:bg-red-700 transition-all"
+                        >
+                            เข้าสู่ระบบ
+                        </button>
+                        <button 
+                            onClick={() => {
+                                setShowLoginModal(false);
+                                setCurrentView(AppView.REGISTER);
+                            }}
+                            className="w-full bg-gray-100 text-gray-700 py-3.5 rounded-xl font-bold text-lg hover:bg-gray-200 transition-all"
+                        >
+                            สมัครสมาชิก
+                        </button>
+                        <button 
+                            onClick={() => setShowLoginModal(false)}
+                            className="w-full text-gray-500 py-2 font-medium hover:text-gray-700 transition-all"
+                        >
+                            ยกเลิก
+                        </button>
+                    </div>
+                </div>
+            </div>
         )}
     </div>
   );

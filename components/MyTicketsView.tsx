@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { PurchasedTicket, TicketStatus } from '../types';
 import { IconScan, IconClock, IconCheckCircle, IconTicket, IconFilter, IconSortAsc, IconSortDesc, IconChevronRight, IconTrophy } from './Icons';
 import { useLanguage } from '../contexts/LanguageContext';
+import { MiniBannerSlider } from './MiniBannerSlider';
 
 interface MyTicketsViewProps {
   tickets: PurchasedTicket[];
@@ -126,6 +127,9 @@ export const MyTicketsView: React.FC<MyTicketsViewProps> = ({ tickets, onGoShopp
           animation: confetti-fall linear forwards;
         }
       `}</style>
+
+      {/* Mini Banner */}
+      <MiniBannerSlider maxBanners={3} />
 
       <div className="flex items-center justify-between">
         <h2 className="text-2xl font-bold text-gray-800">{t('tickets.title')}</h2>

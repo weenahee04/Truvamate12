@@ -36,13 +36,21 @@ const STORAGE_KEY = 'truvamate_language';
 
 export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [language, setLanguageState] = useState<Language>(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    return (saved as Language) || 'TH';
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      return (saved as Language) || 'TH';
+    } catch {
+      return 'TH';
+    }
   });
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
-    localStorage.setItem(STORAGE_KEY, lang);
+    try {
+      localStorage.setItem(STORAGE_KEY, lang);
+    } catch {
+      // localStorage not available
+    }
   };
 
   const t = (path: string): string => {

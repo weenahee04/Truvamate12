@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { IconTrophy, IconX } from './Icons';
 import { useLanguage } from '../contexts/LanguageContext';
 import lotteryService from '../services/lotteryApiService';
+import { MiniBannerSlider } from './MiniBannerSlider';
 
 interface Result {
   id: number;
@@ -90,6 +91,9 @@ export const ResultsView: React.FC = () => {
 
   return (
     <div className="space-y-6">
+       {/* Mini Banner */}
+       <MiniBannerSlider maxBanners={3} />
+
        <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
          <IconTrophy className="text-yellow-500 w-8 h-8" /> 
          {t('results.title')}

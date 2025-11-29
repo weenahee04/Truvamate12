@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { IconMail, IconLock, IconEye, IconEyeOff, IconFacebook, IconGoogle, IconLine, IconHelpCircle, IconX } from './Icons';
+import authService from '../services/firebase';
 
 interface LoginViewProps {
   onLoginSuccess: () => void;
@@ -11,21 +12,51 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLoginSuccess, onGoToRegi
   const [isLoading, setIsLoading] = useState(false);
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [formData, setFormData] = useState({ email: '', password: '' });
+  const [error, setError] = useState('');
+  const [resetEmail, setResetEmail] = useState('');
+  const [resetSuccess, setResetSuccess] = useState(false);
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    // Simulate API call
-    setTimeout(() => {
-      setIsLoading(false);
+    setError('');
+    
+    try {
+      await authService.login(formData.email, formData.password);
       onLoginSuccess();
-    }, 1000);
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const handleForgotPassword = (e: React.FormEvent) => {
-      e.preventDefault();
-      alert("ระบบได้ส่งลิงก์รีเซ็ตรหัสผ่านไปยังอีเมลของคุณแล้ว");
-      setShowForgotPassword(false);
+  const handleGoogleLogin = async () => {
+    setIsLoading(true);
+    setError('');
+    
+    try {
+      await authService.loginWithGoogle();
+      onLoginSuccess();
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleForgotPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    
+    try {
+      await authService.resetPassword(resetEmail);
+      setResetSuccess(true);
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -41,15 +72,22 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLoginSuccess, onGoToRegi
       </div>
 
       <div className="w-full max-w-sm space-y-6">
+          {/* Error Message */}
+          {error && (
+            <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-xl text-sm">
+              {error}
+            </div>
+          )}
+
           <form onSubmit={handleLogin} className="space-y-4">
               <div>
-                 <label className="block text-xs font-bold text-gray-700 mb-1 ml-1">อีเมล หรือ เบอร์โทรศัพท์</label>
+                 <label className="block text-xs font-bold text-gray-700 mb-1 ml-1">อีเมล</label>
                  <div className="relative">
                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                          <IconMail className="w-5 h-5 text-gray-400" />
                      </div>
                      <input 
-                        type="text" 
+                        type="email" 
                         required
                         className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all bg-gray-50 focus:bg-white text-gray-900 placeholder-gray-400"
                         placeholder="กรอกอีเมลของคุณ"
@@ -107,13 +145,17 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLoginSuccess, onGoToRegi
           </div>
 
           <div className="grid grid-cols-3 gap-3">
-              <button className="flex items-center justify-center py-2.5 border border-gray-200 rounded-xl hover:bg-gray-50 transition-colors">
+              <button className="flex items-center justify-center py-2.5 border border-gray-200 rounded-xl hover:bg-gray-50 transition-colors opacity-50 cursor-not-allowed" disabled>
                   <div className="w-6 h-6 text-[#1877F2]"><IconFacebook /></div>
               </button>
-              <button className="flex items-center justify-center py-2.5 border border-gray-200 rounded-xl hover:bg-gray-50 transition-colors">
+              <button 
+                onClick={handleGoogleLogin}
+                disabled={isLoading}
+                className="flex items-center justify-center py-2.5 border border-gray-200 rounded-xl hover:bg-gray-50 transition-colors hover:border-red-300"
+              >
                   <div className="w-6 h-6 text-[#DB4437]"><IconGoogle /></div>
               </button>
-              <button className="flex items-center justify-center py-2.5 border border-gray-200 rounded-xl hover:bg-gray-50 transition-colors">
+              <button className="flex items-center justify-center py-2.5 border border-gray-200 rounded-xl hover:bg-gray-50 transition-colors opacity-50 cursor-not-allowed" disabled>
                   <div className="w-6 h-6 text-[#06C755]"><IconLine /></div>
               </button>
           </div>

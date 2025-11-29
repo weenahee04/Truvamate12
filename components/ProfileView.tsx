@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { IconUser, IconChevronRight, IconWallet, IconShield, IconBell, IconPhone, IconLogOut, IconBank, IconPlus, IconX, IconTrash, IconBuilding, IconCreditCard, IconScan } from './Icons';
+import { IconUser, IconChevronRight, IconWallet, IconShield, IconBell, IconPhone, IconLogOut, IconBank, IconPlus, IconX, IconTrash, IconBuilding, IconCreditCard, IconScan, IconTicket, IconTrophy, IconInfo } from './Icons';
 import { useLanguage } from '../contexts/LanguageContext';
 
 interface ProfileViewProps {
   onGoToHistory?: () => void;
+  onGoToResults?: () => void;
+  onGoToHowToPlay?: () => void;
   onLogout?: () => void;
   onManageBanners?: () => void;
 }
@@ -21,7 +23,7 @@ interface PaymentMethod {
     isPrimary: boolean;
 }
 
-export const ProfileView: React.FC<ProfileViewProps> = ({ onGoToHistory, onLogout, onManageBanners }) => {
+export const ProfileView: React.FC<ProfileViewProps> = ({ onGoToHistory, onGoToResults, onGoToHowToPlay, onLogout, onManageBanners }) => {
   const [balance, setBalance] = useState(4250.00);
   const [activeModal, setActiveModal] = useState<string | null>(null);
   const { t } = useLanguage();
@@ -78,6 +80,25 @@ export const ProfileView: React.FC<ProfileViewProps> = ({ onGoToHistory, onLogou
 
   return (
     <div className="space-y-6 max-w-2xl mx-auto">
+       {/* Quick Access Menu - Mobile Only */}
+       <div className="md:hidden bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+         <div className="px-4 py-3 bg-gray-50 border-b border-gray-100">
+           <h3 className="text-sm font-bold text-gray-600">Quick Access</h3>
+         </div>
+         <div 
+           onClick={() => onGoToHowToPlay?.()}
+           className="flex items-center justify-between p-4 hover:bg-gray-50 cursor-pointer transition-colors"
+         >
+           <div className="flex items-center gap-3">
+             <div className="p-2 bg-purple-50 rounded-lg">
+               <IconInfo className="w-5 h-5 text-purple-500" />
+             </div>
+             <span className="text-sm font-medium text-gray-700">How to Play</span>
+           </div>
+           <IconChevronRight className="w-4 h-4 text-gray-300" />
+         </div>
+       </div>
+
        <div className="flex items-center gap-4 bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
           <div className="w-16 h-16 bg-gradient-to-tr from-gray-200 to-gray-100 rounded-full flex items-center justify-center shadow-inner">
              <IconUser className="w-8 h-8 text-gray-400" />

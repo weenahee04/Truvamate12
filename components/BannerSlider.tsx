@@ -3,9 +3,14 @@ import { IconTicket, IconGift, IconScan, IconX, IconInfo } from './Icons';
 import { useLanguage } from '../contexts/LanguageContext';
 import bannerService, { Banner } from '../services/bannerService';
 
+interface DisplayBanner extends Banner {
+  icon?: React.ReactNode;
+  pattern?: string;
+}
+
 export const BannerSlider: React.FC = () => {
   const [current, setCurrent] = useState(0);
-  const [activeBanner, setActiveBanner] = useState<any>(null);
+  const [activeBanner, setActiveBanner] = useState<DisplayBanner | null>(null);
   const [banners, setBanners] = useState<Banner[]>([]);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const { t } = useLanguage();
@@ -13,14 +18,18 @@ export const BannerSlider: React.FC = () => {
   // Load banners from service
   useEffect(() => {
     const loadBanners = () => {
-      const activeBanners = bannerService.getActiveBanners();
-      setBanners(activeBanners);
-      setCurrent(0); // Reset to first banner when banners change
+      try {
+        const activeBanners = bannerService.getActiveBanners();
+        setBanners(activeBanners);
+        setCurrent(0);
+      } catch (error) {
+        console.error('Error loading banners:', error);
+        setBanners([]);
+      }
     };
 
     loadBanners();
 
-    // Listen for banner updates
     const handleBannersUpdate = () => {
       loadBanners();
     };
@@ -31,21 +40,35 @@ export const BannerSlider: React.FC = () => {
     };
   }, []);
 
-  const BANNERS = banners.length > 0 ? banners : [
-    {
-        id: 1,
-        title: t('banner.guide.title'),
-        subtitle: t('banner.guide.subtitle'),
-        description: t('banner.guide.desc'),
-        color: "bg-black",
-        bgImage: "https://www.powerball.com/themes/custom/baseline/images/home_hero.png",
-        detail: t('banner.guide.detail'),
-        width: 1200,
-        height: 400,
-        isActive: true,
-        order: 1
+  // Add icons to banners
+  const getIconForBanner = (id: number): React.ReactNode => {
+    switch(id) {
+      case 1: return <IconScan className="w-10 h-10 md:w-16 md:h-16 text-white/80" />;
+      case 2: return <IconTicket className="w-10 h-10 md:w-16 md:h-16 text-white/80" />;
+      case 3: return <IconGift className="w-10 h-10 md:w-16 md:h-16 text-white/80" />;
+      default: return <IconTicket className="w-10 h-10 md:w-16 md:h-16 text-white/80" />;
     }
-  ];
+  };
+
+  const BANNERS: DisplayBanner[] = banners.length > 0 
+    ? banners.map(b => ({ ...b, icon: getIconForBanner(b.id), pattern: 'opacity-20' }))
+    : [
+        {
+          id: 1,
+          title: t('banner.guide.title'),
+          subtitle: t('banner.guide.subtitle'),
+          description: t('banner.guide.desc'),
+          color: "bg-black",
+          bgImage: "https://www.powerball.com/themes/custom/baseline/images/home_hero.png",
+          detail: t('banner.guide.detail'),
+          width: 1200,
+          height: 400,
+          isActive: true,
+          order: 1,
+          icon: <IconScan className="w-10 h-10 md:w-16 md:h-16 text-white/80" />,
+          pattern: 'opacity-20'
+        }
+      ];
 
   const resetTimeout = () => {
     if (timeoutRef.current) {
@@ -90,9 +113,9 @@ export const BannerSlider: React.FC = () => {
                 <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent"></div>
                 
                 {/* Background Pattern */}
-                <div className={`absolute -right-4 -top-8 ${banner.pattern} pointer-events-none`}>
+                <div className={`absolute -right-4 -top-8 ${banner.pattern || 'opacity-20'} pointer-events-none`}>
                      <div className="transform rotate-12 scale-[2.5] md:scale-[4]">
-                        {banner.icon}
+                        {banner.icon || <IconTicket className="w-10 h-10 md:w-16 md:h-16 text-white/80" />}
                      </div>
                 </div>
                 
@@ -124,7 +147,7 @@ export const BannerSlider: React.FC = () => {
 
                 {/* Main Icon Bottom Right (Hidden on small mobile to avoid clutter, visible on larger) */}
                 <div className="absolute right-3 bottom-3 md:right-10 md:bottom-10 bg-white/10 p-2 md:p-5 rounded-full backdrop-blur-md shadow-inner border border-white/10 scale-75 md:scale-100 pointer-events-none">
-                    {banner.icon}
+                    {banner.icon || <IconTicket className="w-10 h-10 md:w-16 md:h-16 text-white/80" />}
                 </div>
             </div>
           ))}
@@ -147,7 +170,7 @@ export const BannerSlider: React.FC = () => {
               <div className="bg-white rounded-2xl w-full max-w-md overflow-hidden shadow-2xl relative" onClick={e => e.stopPropagation()}>
                   <div className={`h-32 ${activeBanner.color} relative overflow-hidden flex items-center justify-center`}>
                       <div className="absolute inset-0 opacity-20 transform scale-150 rotate-12 flex items-center justify-center">
-                          {activeBanner.icon}
+                          {activeBanner.icon || <IconTicket className="w-10 h-10 md:w-16 md:h-16 text-white/80" />}
                       </div>
                       <h3 className="text-2xl font-bold text-white relative z-10 drop-shadow-md px-6 text-center">{activeBanner.title}</h3>
                       <button onClick={() => setActiveBanner(null)} className="absolute top-4 right-4 bg-black/20 text-white rounded-full p-1 hover:bg-black/40 backdrop-blur-md">

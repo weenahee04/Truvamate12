@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { LotteryGame } from '../types';
+import gameImageService, { GameImage } from '../services/gameImageService';
 
 interface GameCardProps {
   game: LotteryGame;
@@ -9,6 +10,21 @@ interface GameCardProps {
 }
 
 export const GameCard: React.FC<GameCardProps> = ({ game, onClick, isFavorite = false, onToggleFavorite }) => {
+  const [gameImage, setGameImage] = useState<GameImage | undefined>();
+
+  useEffect(() => {
+    const loadImage = () => {
+      const img = gameImageService.getGameImage(game.id);
+      setGameImage(img);
+    };
+    loadImage();
+
+    // Listen for image updates
+    const handleUpdate = () => loadImage();
+    window.addEventListener('gameImagesUpdated', handleUpdate);
+    return () => window.removeEventListener('gameImagesUpdated', handleUpdate);
+  }, [game.id]);
+
   return (
     <div 
       className="bg-gray-50 rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all active:scale-95 relative group"
@@ -42,10 +58,10 @@ export const GameCard: React.FC<GameCardProps> = ({ game, onClick, isFavorite = 
           {/* Background Image */}
           <div className="absolute inset-0 opacity-20">
               <img 
-                  src={game.name.includes('POWERBALL') 
+                  src={gameImage?.backgroundImage || (game.name.includes('POWERBALL') 
                       ? 'https://www.powerball.com/themes/custom/baseline/images/powerball_ball_texture.jpg'
                       : 'https://www.megamillions.com/images/interface/mm-logo-lg.png'
-                  }
+                  )}
                   alt={game.name}
                   className="w-full h-full object-cover"
                   onError={(e) => e.currentTarget.style.display = 'none'}
@@ -55,7 +71,14 @@ export const GameCard: React.FC<GameCardProps> = ({ game, onClick, isFavorite = 
           <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent"></div>
           
           <div className="font-bold text-xl drop-shadow-md z-10 flex items-center gap-2">
-              {(game.name.includes('POWERBALL') || game.name.includes('MEGA MILLIONS')) && (
+              {gameImage?.logoImage ? (
+                <img 
+                  src={gameImage.logoImage}
+                  alt={game.name}
+                  className="w-8 h-8 object-contain"
+                  onError={(e) => e.currentTarget.style.display = 'none'}
+                />
+              ) : (game.name.includes('POWERBALL') || game.name.includes('MEGA MILLIONS')) && (
                 <img 
                   src={game.name.includes('POWERBALL') ? '/image/us-powerball.png' : '/image/us-megamillions.png'}
                   alt="US Lottery"

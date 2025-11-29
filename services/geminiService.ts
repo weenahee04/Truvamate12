@@ -1,9 +1,29 @@
 import { GoogleGenAI, Type } from "@google/genai";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+// Lazy initialization - only create client when API key is available
+let ai: GoogleGenAI | null = null;
+
+const getAI = (): GoogleGenAI | null => {
+  if (ai) return ai;
+  
+  const apiKey = process.env.API_KEY || process.env.GEMINI_API_KEY;
+  if (apiKey) {
+    ai = new GoogleGenAI({ apiKey });
+    return ai;
+  }
+  return null;
+};
 
 export const generateLuckyNumbers = async (context: string): Promise<{ main: number[], power: number, reason: string }> => {
   try {
+    const client = getAI();
+    
+    // If no API key, use fallback immediately
+    if (!client) {
+      console.warn("No Gemini API key configured, using random numbers");
+      return generateRandomNumbers();
+    }
+    
     const modelId = 'gemini-2.5-flash';
     
     const prompt = `
@@ -11,7 +31,7 @@ export const generateLuckyNumbers = async (context: string): Promise<{ main: num
       Provide a brief, mystical or fun reason in Thai language why these numbers were chosen.
     `;
 
-    const response = await ai.models.generateContent({
+    const response = await client.models.generateContent({
       model: modelId,
       contents: prompt,
       config: {
@@ -52,11 +72,19 @@ export const generateLuckyNumbers = async (context: string): Promise<{ main: num
 
   } catch (error) {
     console.error("Gemini AI Error:", error);
-    // Fallback random numbers
-    return {
-      main: Array.from({ length: 5 }, () => Math.floor(Math.random() * 69) + 1),
-      power: Math.floor(Math.random() * 26) + 1,
-      reason: "AI กำลังพักผ่อน เราจึงสุ่มตัวเลขให้คุณแทน"
-    };
+    return generateRandomNumbers();
   }
+};
+
+// Helper function for random number generation
+const generateRandomNumbers = (): { main: number[], power: number, reason: string } => {
+  const mainSet = new Set<number>();
+  while (mainSet.size < 5) {
+    mainSet.add(Math.floor(Math.random() * 69) + 1);
+  }
+  return {
+    main: Array.from(mainSet).sort((a, b) => a - b),
+    power: Math.floor(Math.random() * 26) + 1,
+    reason: "🎲 เลขนำโชคจากระบบสุ่มอัตโนมัติ ขอให้โชคดี!"
+  };
 };
